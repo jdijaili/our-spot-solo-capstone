@@ -11,3 +11,5 @@ class Park(db.Model):
     imageURL = db.Column(db.String, nullable=False)
 
     lists = db.relationship('List', secondary=park_lists, back_populates='parks')
+    comments = db.relationship('Comment', back_populates='park')
+    favorites = db.relationship('Favorite', back_populates='park')
