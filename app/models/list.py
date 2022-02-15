@@ -7,3 +7,5 @@ class List(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(40), nullable=False)
     description = db.Column(db.Text)
+
+    user = db.relationship('User', back_populates='list')
