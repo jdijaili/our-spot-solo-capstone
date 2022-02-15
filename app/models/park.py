@@ -14,6 +14,7 @@ class Park(db.Model):
     lists = db.relationship('List', secondary=park_lists, back_populates='parks')
     comments = db.relationship('Comment', back_populates='park')
     favorites = db.relationship('Favorite', back_populates='park')
+    park_photos = db.relationship('Park_Photo', back_populates='park')
 
     def to_JSON(self):
         return {

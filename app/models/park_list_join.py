@@ -1,6 +1,6 @@
 from .db import db
 
-class ParkListJoin(db.Model):
+class Park_List_Join(db.Model):
     __tablename__ = 'park_list_joins'
 
     id = db.Column(db.Integer, primary_key=True)
