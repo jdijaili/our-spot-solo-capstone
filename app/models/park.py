@@ -8,3 +8,5 @@ class Park(db.Model):
     city = db.Column(db.String(40), nullable=False)
     description = db.Column(db.Text, nullable=False)
     imageURL = db.Column(db.String, nullable=False)
+
+    lists = db.relationship('List', secondary=park_lists)
