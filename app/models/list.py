@@ -1,4 +1,5 @@
 from .db import db
+from park_list_join import park_lists
 
 class List(db.Model):
     __tablename__ = 'lists'
@@ -9,3 +10,4 @@ class List(db.Model):
     description = db.Column(db.Text)
 
     user = db.relationship('User', back_populates='list')
+    parks = db.relationship('Park', secondary=park_lists, back_populates='lists')
