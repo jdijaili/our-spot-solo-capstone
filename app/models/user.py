@@ -28,3 +28,10 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email
+        }
