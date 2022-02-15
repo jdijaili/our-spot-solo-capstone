@@ -8,6 +8,14 @@ class ParkListJoin(db.Model):
     list_id = db.Column(db.Integer, nullable=False)
     notes = db.Column(db.Text)
 
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'park_id': self.park_id,
+            'list_id': self.list_id,
+            'notes': self.notes
+        }
+
 
 park_lists = db.Table(
     "park_lists",

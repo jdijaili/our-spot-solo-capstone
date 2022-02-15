@@ -9,5 +9,9 @@ class Favorite(db.Model):
 
     park = db.relationship('Park', back_populates='favorites')
 
-def to_JSON():
-    
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'park_id': self.park_id
+        }

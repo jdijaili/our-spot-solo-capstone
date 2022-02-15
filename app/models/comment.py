@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -18,7 +19,7 @@ class Comment(db.Model):
         return {
             'id': self.id,
             'park_id': self.park_id,
-            'user_id': self.usere_id,
+            'user_id': self.user_id,
             'reply': self.reply,
             'commentText': self.commentText,
             'created_at': self.created_at,
