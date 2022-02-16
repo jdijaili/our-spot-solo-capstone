@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import HomeView from './components/HomeView/HomeView';
 import Footer from './components/Footer/Footer';
+import ParkView from './components/ParksView/ParksView';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +37,11 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+
+        <Route path='/parks' exact={true}>
+          <ParkView />
+        </Route>
+
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
