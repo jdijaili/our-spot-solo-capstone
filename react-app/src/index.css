@@ -1,12 +1,3 @@
-a {
-    font-family: monospace;
-    text-decoration: none;
-    color: black;
-    border: 1px solid black;
-    border-radius: 50px;
-    padding: 8px;
-}
-
 body {
     background-color: rgb(143, 188, 143);
 }
