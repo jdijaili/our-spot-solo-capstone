@@ -12,12 +12,12 @@ const NavBar = () => {
       <ul className='site-options'>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
-            Our Place
+            Our Spot
           </NavLink>
         </li>
       </ul>
       <ul className='user-options'>
-          {(user) ? <NavLink className='logged-in' to={`/users/${user.id}`}>Hi, {user.username}!</NavLink> : ''}
+          {(user) ? <NavLink className='logged-in' to={`/users/${user.id}`}>Hey, {user.username}!</NavLink> : ''}
           {(user) ? <div className='logged-in'></div> : ''}
           {(user) ? <LogoutButton /> : <LoginSignup />}
         </ul>

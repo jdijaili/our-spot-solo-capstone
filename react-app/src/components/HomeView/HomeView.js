@@ -7,7 +7,7 @@ const HomeView = () => {
     const logged_in = (
         <div className='home'>
             <div className='home-graphic'>
-                <img src='https://res.cloudinary.com/jenn/image/upload/v1644990859/our-spot/photo-1561641250-c06551cf3b02_fb3hng.jpg' alt='bonsai tree'/>
+                <img src='https://res.cloudinary.com/jenn/image/upload/v1644994888/our-spot/104-1041921_sticker-bonsai-chic-ambiance-sticker-kc-9364-bonsai_okpwjq.png' alt='bonsai tree'/>
             </div>
             <div className='home-content'>
                 <h1>Welcome to Our Spot</h1>
