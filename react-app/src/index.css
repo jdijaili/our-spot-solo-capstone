@@ -1,1 +1,14 @@
-/* TODO Add site wide styles */
+a {
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+button {
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+    font-size: 16px;
+}

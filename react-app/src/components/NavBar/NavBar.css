@@ -7,6 +7,38 @@ nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
     color: black;
-    font-size: 14px;
-    height: 50px;
+    font-size: 16px;
+    height: 80px;
+}
+
+.site-options {
+    display: flex;
+    list-style: none;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-options {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+    margin-right: 32px;
+}
+
+.login-signup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.login-signup>li {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.logged-in {
+    margin-left: 8px;
+    margin-right: 8px;
 }
