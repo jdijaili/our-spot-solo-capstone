@@ -5,8 +5,8 @@ class Park_Photo(db.Model):
     __tablename__ = 'park_photos'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    park_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.id'), nullable=False)
     imageURL = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
