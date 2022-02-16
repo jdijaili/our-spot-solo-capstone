@@ -1,5 +1,5 @@
 from .db import db
-from park_list_join import park_lists
+from .park_list_join import park_lists
 from datetime import datetime
 
 class List(db.Model):

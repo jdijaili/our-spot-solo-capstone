@@ -1,5 +1,5 @@
 from .db import db
-from park_list_join import park_lists
+from .park_list_join import park_lists
 
 class Park(db.Model):
     __tablename__ = 'parks'
