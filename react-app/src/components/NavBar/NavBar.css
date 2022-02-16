@@ -11,6 +11,10 @@ nav {
     height: 80px;
 }
 
+button {
+    font-size: 16px;
+}
+
 .site-options {
     display: flex;
     list-style: none;
@@ -25,6 +29,7 @@ nav {
     align-items: center;
     text-align: right;
     margin-right: 32px;
+    padding-right: 16px;
 }
 
 .login-signup {
