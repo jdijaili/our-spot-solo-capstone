@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import './HomeView.css'
 
 const HomeView = () => {
     const user = useSelector(state => state.session.user)

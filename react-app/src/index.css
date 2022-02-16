@@ -7,6 +7,10 @@ a {
     padding: 8px;
 }
 
+body {
+    background-color: rgb(143, 188, 143);
+}
+
 h1 {
     font-family: monospace;
 }

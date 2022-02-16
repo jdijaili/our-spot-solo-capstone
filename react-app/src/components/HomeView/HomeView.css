@@ -1,0 +1,21 @@
+.home {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.home-graphic {
+    margin-right: 8px;
+}
+
+.home-graphic img {
+    height: 500px;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
