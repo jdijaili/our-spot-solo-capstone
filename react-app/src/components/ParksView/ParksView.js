@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getParks } from '../../store/parks';
+import ParkCard from '../ParkCard/ParkCard';
 import './ParksView.css'
 
 
 const ParkView = () => {
     const dispatch = useDispatch();
-    const parks = useSelector(state => state.parks);
+    const parks = Object.values(useSelector(state => state.parks));
 
     useEffect(async () => {
         await dispatch(getParks());
@@ -18,7 +19,11 @@ const ParkView = () => {
                 <h1>- Explore your local parks -</h1>
             </div>
             <div>
-                
+                {parks.map(park => (
+                    <div key={park.id}>
+                        <ParkCard park={park} />
+                    </div>
+                ))}
             </div>
         </>
     )
