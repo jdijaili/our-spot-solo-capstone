@@ -3,10 +3,17 @@ import { csrfFetch } from "../helpers";
 // ACTIONS
 const LOAD_COMMENTS = 'comments/LOAD_COMMENTS';
 
+const CREATE_COMMENT = 'comments/CREATE_COMMENT';
+
 // ACTION CREATORS
 const loadComments = (comments) => ({
     type: LOAD_COMMENTS,
     comments
+});
+
+const createComment = (comment) => ({
+    type: CREATE_COMMENT,
+    comment
 });
 
 // THUNK CREATORS
@@ -24,7 +31,33 @@ export const getComments = (parkId) => async (dispatch) => {
     } else {
         return ['An error occured. Please try again.'];
     }
-}
+};
+
+export const postComment = ({parkId, userId, reply, comment}) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${parkId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            park_id: parkId,
+            user_id: userId,
+            reply,
+            commentText: comment
+        })
+    });
+
+    if (res.ok) {
+        const comment = res.json();
+        dispatch(createComment(comment));
+        return comment;
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.'];
+    }
+};
 
 // REDUCER
 const commentsReducer = (state = {}, action) => {
@@ -35,6 +68,9 @@ const commentsReducer = (state = {}, action) => {
                 updatedState[comment.id] = comment;
             });
             return updatedState
+        case CREATE_COMMENT:
+            updatedState[action.comment.id] = action.comment;
+            return updatedState;
         default:
             return updatedState;
     }
