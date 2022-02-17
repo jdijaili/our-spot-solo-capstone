@@ -1,5 +1,5 @@
 // ACTIONS
-const LOAD_PARKS = 'parks/LOAD_PROJECTS';
+const LOAD_PARKS = 'parks/LOAD_PARKS';
 
 // ACTION CREATORS
 const loadParks = (parks) => ({

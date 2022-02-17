@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getComments, postComment } from '../../store/comments';
 import './Comment.css'
+import CommentCard from './CommentCard';
 
 const Comment = ({ parkId }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
-    console.log('!!!!!!!', comments)
+    const parkComments = comments.filter(comment => comment.park_id === parseInt(parkId));
+    console.log('!!!!!!!', parkComments)
+    console.log(parkId)
 
     const [errors, setErrors] = useState([]);
     const [comment, setComment] = useState('');
@@ -31,6 +34,7 @@ const Comment = ({ parkId }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             });
+        console.log(submittedComment)
         if (submittedComment) {
             setComment('');
         }
@@ -43,8 +47,8 @@ const Comment = ({ parkId }) => {
 
     return (
         <div>
-            {comments.map(comment => (
-                
+            {parkComments?.map(comment => (
+                <CommentCard comment={comment} key={comment.id}/>
             ))}
             <h3>New Comment</h3>
             <form onSubmit={handleSubmit}>

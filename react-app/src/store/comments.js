@@ -17,8 +17,8 @@ const createComment = (comment) => ({
 });
 
 // THUNK CREATORS
-export const getComments = (parkId) => async (dispatch) => {
-    const res = await fetch(`/api/comments/${parkId}`);
+export const getComments = () => async (dispatch) => {
+    const res = await fetch(`/api/comments/`);
 
     if (res.ok) {
         const comments = await res.json();
@@ -46,7 +46,7 @@ export const postComment = ({parkId, userId, reply, comment}) => async (dispatch
     });
 
     if (res.ok) {
-        const comment = res.json();
+        const comment = await res.json();
         dispatch(createComment(comment));
         return comment;
     } else if (res.status < 500) {

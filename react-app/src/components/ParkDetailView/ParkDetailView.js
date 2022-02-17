@@ -12,8 +12,6 @@ const ParkDetailView = () => {
     const parks = Object.values(useSelector(state => state.parks));
     const selectedPark = parks.filter(park => park.id === parseInt(parkId))[0];
 
-    console.log(selectedPark)
-
     useEffect(() => {
         dispatch(getParks());
     }, [dispatch]);
