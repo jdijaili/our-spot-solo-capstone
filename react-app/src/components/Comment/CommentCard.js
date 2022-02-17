@@ -28,7 +28,7 @@ const CommentCard = ({ comment, parkId }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             });
-        console.log(submittedComment)
+
         if (submittedComment) {
             setShowForm(false);
         }

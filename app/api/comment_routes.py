@@ -40,14 +40,22 @@ def post_comment(park_id):
 def edit_comment(park_id):
     id = request.json["id"]
     comment = db.session.query(Comment).filter(Comment.id == id).one()
-    print('before update')
-    print(comment.to_dict())
-    comment.commentText = request.json["commentText"]
-    print('after update')
-    print(comment.to_dict())
-    db.session.commit()
 
     if comment:
+        comment.commentText = request.json["commentText"]
+        db.session.commit()
         return jsonify(comment.to_dict())
     else:
         return make_response({"errors": ["Edit on non-existent comment"]})
+
+@comment_routes.route('/<int:park_id>', methods=['DELETE'])
+def delete_comment(park_id):
+    id = request.json["id"]
+    comment = db.session.query(Comment).filter(Comment.id == id).one()
+
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+        return {"errors": False}
+    else:
+        return make_response({"errors": ["Delete on non-existent comment"]})

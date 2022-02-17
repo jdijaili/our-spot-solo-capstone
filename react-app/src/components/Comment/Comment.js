@@ -9,9 +9,6 @@ const Comment = ({ parkId }) => {
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
     const parkComments = comments.filter(comment => comment.parkId === parseInt(parkId));
-    console.log('!!!!!!!')
-    console.log(comments)
-    console.log(parkComments)
 
     const [errors, setErrors] = useState([]);
     const [comment, setComment] = useState('');
@@ -48,7 +45,7 @@ const Comment = ({ parkId }) => {
 
     return (
         <div>
-            {parkComments?.map(comment => (
+            {parkComments.map(comment => (
                 <CommentCard comment={comment} parkId={parkId} key={comment.id}/>
             ))}
             <h3>New Comment</h3>
