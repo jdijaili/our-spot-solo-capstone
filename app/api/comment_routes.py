@@ -17,7 +17,7 @@ def get_comments():
             if (u.id == comment.user_id):
                 comment.username = u.username
 
-    print([comment.to_dict() for comment in comments])
+    print([comment.to_JSON() for comment in comments])
 
     return jsonify([comment.to_JSON() for comment in comments])
 

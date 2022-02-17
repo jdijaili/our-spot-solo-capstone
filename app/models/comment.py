@@ -32,6 +32,7 @@ class Comment(db.Model):
             'parkId': self.park_id,
             'userId': self.user_id,
             'reply': self.reply,
+            "username": self.username,
             'commentText': self.commentText,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
