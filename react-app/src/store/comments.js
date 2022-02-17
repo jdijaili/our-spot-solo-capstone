@@ -66,12 +66,12 @@ export const postComment = ({ parkId, userId, reply, comment }) => async (dispat
     }
 };
 
-export const editComment = ({ parkId, userId, reply, comment }) =>  async (dispatch) => {
+export const editComment = ({ id, parkId, userId, reply, comment }) =>  async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${parkId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            park_id: parkId,
+            id,
             user_id: userId,
             reply,
             commentText: comment
@@ -80,7 +80,7 @@ export const editComment = ({ parkId, userId, reply, comment }) =>  async (dispa
 
     if (res.ok) {
         const comment = await res.json();
-        dispatch(updateComment)
+        dispatch(updateComment(comment));
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
@@ -101,6 +101,7 @@ const commentsReducer = (state = {}, action) => {
             });
             return updatedState
         case CREATE_COMMENT:
+        case UPDATE_COMMENT:
             updatedState[action.comment.id] = action.comment;
             return updatedState;
         default:

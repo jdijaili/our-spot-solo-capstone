@@ -9,8 +9,6 @@ comment_routes = Blueprint('comments', __name__)
 def get_comments():
     comments = Comment.query.all()
     comment_user_query = db.session.query(Comment, User).select_from(Comment).join(User).all()
-    print(comment_user_query[0])
-    print(str(comment_user_query[0][1]))
     for comment in comments:
         for c, u in comment_user_query:
             if (u.id == comment.user_id):
@@ -34,17 +32,22 @@ def post_comment(park_id):
 
         comment.username = user_query[0][1].username
 
-        return comment.to_JSON()
+        return comment.to_dict()
     else:
         return make_response({'errors': 'Error(s) on the comment occured'})
 
 @comment_routes.route('/<int:park_id>', methods=['PUT'])
-def edit_comment():
-    user_id = request.json["id"]
-    comment = db.session.query(Comment).filter(Comment.id == user_id)
+def edit_comment(park_id):
+    id = request.json["id"]
+    comment = db.session.query(Comment).filter(Comment.id == id).one()
+    print('before update')
+    print(comment.to_dict())
     comment.commentText = request.json["commentText"]
+    print('after update')
+    print(comment.to_dict())
+    db.session.commit()
 
     if comment:
-        comment.to_JSON()
+        return jsonify(comment.to_dict())
     else:
         return make_response({"errors": ["Edit on non-existent comment"]})
