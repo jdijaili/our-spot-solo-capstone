@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 import './ParkCard.css'
 
 const ParkCard = ({ park }) => {
     return (
         <>
-            <div>
-                <h2>{park.name}</h2>
-            </div>
-            <div>
-                <img src={park.imageURL} />
+            <div className='park-card'>
+                <Link></Link>
+                <img className='park-card-img' src={park.imageURL} alt={`${park.name}`}/>
+                <div className='park-info'>
+                    <h2>{park.name}</h2>
+                    <h4>{park.city}</h4>
+                </div>
             </div>
 
         </>
