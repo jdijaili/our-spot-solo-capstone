@@ -5,6 +5,8 @@ const LOAD_COMMENTS = 'comments/LOAD_COMMENTS';
 
 const CREATE_COMMENT = 'comments/CREATE_COMMENT';
 
+const UPDATE_COMMENT = 'comments/UPDATE_COMMENT';
+
 // ACTION CREATORS
 const loadComments = (comments) => ({
     type: LOAD_COMMENTS,
@@ -15,6 +17,11 @@ const createComment = (comment) => ({
     type: CREATE_COMMENT,
     comment
 });
+
+const updateComment = (comment) => ({
+    type: UPDATE_COMMENT,
+    comment
+})
 
 // THUNK CREATORS
 export const getComments = () => async (dispatch) => {
@@ -33,7 +40,7 @@ export const getComments = () => async (dispatch) => {
     }
 };
 
-export const postComment = ({parkId, userId, reply, comment}) => async (dispatch) => {
+export const postComment = ({ parkId, userId, reply, comment }) => async (dispatch) => {
     const res = await csrfFetch(`/api/comments/${parkId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -59,10 +66,35 @@ export const postComment = ({parkId, userId, reply, comment}) => async (dispatch
     }
 };
 
+export const editComment = ({ parkId, userId, reply, comment }) =>  async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${parkId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            park_id: parkId,
+            user_id: userId,
+            reply,
+            commentText: comment
+        })
+    });
+
+    if (res.ok) {
+        const comment = await res.json();
+        dispatch(updateComment)
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.'];
+    }
+}
+
 // REDUCER
 const commentsReducer = (state = {}, action) => {
     let updatedState = { ...state };
-    switch(action.type) {
+    switch (action.type) {
         case LOAD_COMMENTS:
             action.comments.forEach(comment => {
                 updatedState[comment.id] = comment;

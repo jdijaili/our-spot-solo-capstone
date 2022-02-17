@@ -1,4 +1,3 @@
-from asyncio.proactor_events import constants
 from crypt import methods
 from flask import Blueprint, jsonify, make_response, request
 from sqlalchemy import JSON
@@ -17,8 +16,6 @@ def get_comments():
             if (u.id == comment.user_id):
                 comment.username = u.username
 
-    print([comment.to_JSON() for comment in comments])
-
     return jsonify([comment.to_JSON() for comment in comments])
 
 @comment_routes.route('/<int:park_id>', methods=['POST'])
@@ -30,7 +27,7 @@ def post_comment(park_id):
         commentText=request.json['commentText']
     );
 
-    if (comment):
+    if comment:
         db.session.add(comment)
         db.session.commit()
         user_query = db.session.query(Comment, User).select_from(Comment).join(User).filter(Comment.id == comment.id).all()
@@ -41,3 +38,13 @@ def post_comment(park_id):
     else:
         return make_response({'errors': 'Error(s) on the comment occured'})
 
+@comment_routes.route('/<int:park_id>', methods=['PUT'])
+def edit_comment():
+    user_id = request.json["id"]
+    comment = db.session.query(Comment).filter(Comment.id == user_id)
+    comment.commentText = request.json["commentText"]
+
+    if comment:
+        comment.to_JSON()
+    else:
+        return make_response({"errors": ["Edit on non-existent comment"]})

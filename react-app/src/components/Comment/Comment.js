@@ -49,7 +49,7 @@ const Comment = ({ parkId }) => {
     return (
         <div>
             {parkComments?.map(comment => (
-                <CommentCard comment={comment} key={comment.id}/>
+                <CommentCard comment={comment} parkId={parkId} key={comment.id}/>
             ))}
             <h3>New Comment</h3>
             <form onSubmit={handleSubmit}>
