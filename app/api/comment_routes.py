@@ -33,10 +33,11 @@ def post_comment(park_id):
     if (comment):
         db.session.add(comment)
         db.session.commit()
-        # user_query = db.session.query(Comment, User).filter(Comment.user_id == User.id).all();
+        user_query = db.session.query(Comment, User).select_from(Comment).join(User).filter(Comment.id == comment.id).all()
 
-        # comment.username = user_query[0][1].username
+        comment.username = user_query[0][1].username
 
         return comment.to_JSON()
     else:
         return make_response({'errors': 'Error(s) on the comment occured'})
+
