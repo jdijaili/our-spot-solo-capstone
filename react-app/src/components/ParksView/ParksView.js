@@ -9,9 +9,9 @@ const ParkView = () => {
     const dispatch = useDispatch();
     const parks = Object.values(useSelector(state => state.parks));
 
-    useEffect(async () => {
-        await dispatch(getParks());
-    }, []);
+    useEffect(() => {
+        dispatch(getParks());
+    }, [dispatch]);
 
     return (
         <>

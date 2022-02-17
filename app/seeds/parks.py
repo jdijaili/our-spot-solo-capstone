@@ -5,7 +5,7 @@ def seed_parks():
         name='Mission Dolores Park',
         city='San Francisco',
         state='California',
-        description='This San Francisco classic brings is a hot spot for picnics & people-watching.',
+        description='This San Francisco classic is a hot spot for picnics & people-watching.',
         imageURL='https://res.cloudinary.com/jenn/image/upload/v1645045904/our-spot/dolorspark_jx0o3k.jpg'
     )
 
