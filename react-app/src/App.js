@@ -11,13 +11,14 @@ import { authenticate } from './store/session';
 import HomeView from './components/HomeView/HomeView';
 import Footer from './components/Footer/Footer';
 import ParkView from './components/ParksView/ParksView';
+import ParkDetailView from './components/ParkDetailView/ParkDetailView';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -42,8 +43,12 @@ function App() {
           <ParkView />
         </Route>
 
+        <Route path='/parks/:parkId' exact={true}>
+          <ParkDetailView />
+        </Route>
+
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
