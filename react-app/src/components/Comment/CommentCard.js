@@ -1,7 +1,8 @@
 const CommentCard = ({ comment }) => {
+    console.log(comment)
     return (
         <div>
-            <p>{comment.commentText}</p>
+            <p>{comment.username}: {comment.commentText}</p>
         </div>
     )
 };
