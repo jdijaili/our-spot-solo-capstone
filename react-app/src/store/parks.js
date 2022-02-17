@@ -9,7 +9,7 @@ const loadParks = (parks) => ({
 
 // THUNK CREATORS
 export const getParks = () => async (dispatch) => {
-    const res = await fetch('/api/parks');
+    const res = await fetch('/api/parks/');
 
     if (res.ok) {
         const parks = await res.json();

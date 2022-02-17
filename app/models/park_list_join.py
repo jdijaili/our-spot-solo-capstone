@@ -16,6 +16,14 @@ class Park_List_Join(db.Model):
             'notes': self.notes
         }
 
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'parkId': self.park_id,
+            'listId': self.list_id,
+            'notes': self.notes
+        }
+
 
 park_lists = db.Table(
     "park_lists",

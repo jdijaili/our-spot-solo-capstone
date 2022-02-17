@@ -10,7 +10,8 @@ comment_routes = Blueprint('comments', __name__)
 def get_comments():
     comments = Comment.query.all()
     comment_user_query = db.session.query(Comment, User).select_from(Comment).join(User).all()
-    print(comment_user_query[0][1])
+    print(comment_user_query[0])
+    print(str(comment_user_query[0][1]))
     for comment in comments:
         for c, u in comment_user_query:
             if (u.id == comment.user_id):

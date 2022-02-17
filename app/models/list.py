@@ -15,7 +15,7 @@ class List(db.Model):
     user = db.relationship('User', back_populates='list')
     parks = db.relationship('Park', secondary=park_lists, back_populates='lists')
 
-    def to_JSON(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -23,4 +23,14 @@ class List(db.Model):
             'description': self.description,
             'created_at': self.created_at,
             'updated_at': self.updated_at
+        }
+
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'title': self.title,
+            'description': self.description,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
         }

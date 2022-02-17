@@ -16,6 +16,16 @@ class Park(db.Model):
     favorites = db.relationship('Favorite', back_populates='park')
     park_photos = db.relationship('Park_Photo', back_populates='park')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'city': self.city,
+            'state': self.state,
+            'description': self.description,
+            'imageURL': self.imageURL
+        }
+
     def to_JSON(self):
         return {
             'id': self.id,

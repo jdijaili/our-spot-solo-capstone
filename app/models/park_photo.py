@@ -14,7 +14,7 @@ class Park_Photo(db.Model):
     user = db.relationship('User', back_populates='park_photos')
     park = db.relationship('Park', back_populates='park_photos')
 
-    def to_JSON(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -22,4 +22,14 @@ class Park_Photo(db.Model):
             'imageURL': self.imageURL,
             'created_at': self.created_at,
             'updated_at': self.updated_at
+        }
+
+    def to_JSON(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'parkId': self.park_id,
+            'imageURL': self.imageURL,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
         }
