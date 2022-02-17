@@ -17,6 +17,8 @@ def get_comments():
             if (u.id == comment.user_id):
                 comment.username = u.username
 
+    print([comment.to_dict() for comment in comments])
+
     return jsonify([comment.to_JSON() for comment in comments])
 
 @comment_routes.route('/<int:park_id>', methods=['POST'])
@@ -31,9 +33,9 @@ def post_comment(park_id):
     if (comment):
         db.session.add(comment)
         db.session.commit()
-        user_query = db.session.query(Comment, User).filter(Comment.user_id == User.id).all();
+        # user_query = db.session.query(Comment, User).filter(Comment.user_id == User.id).all();
 
-        comment.username = user_query[0][1].username
+        # comment.username = user_query[0][1].username
 
         return comment.to_JSON()
     else:

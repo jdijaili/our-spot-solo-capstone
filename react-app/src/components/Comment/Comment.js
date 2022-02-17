@@ -8,7 +8,7 @@ const Comment = ({ parkId }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
-    const parkComments = comments.filter(comment => comment.park_id === parseInt(parkId));
+    const parkComments = comments.filter(comment => comment.parkId === parseInt(parkId));
     console.log('!!!!!!!')
     console.log(comments)
     console.log(parkComments)
