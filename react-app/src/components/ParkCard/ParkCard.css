@@ -12,8 +12,6 @@
     width: 75%;
     height: 100%;
     object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     margin: 0;
     padding: 0;
 }
@@ -32,4 +30,3 @@
 .park-info>h2 {
     font-size: 15px;
 }
-
