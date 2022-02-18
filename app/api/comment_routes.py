@@ -40,11 +40,16 @@ def post_comment(park_id):
 def edit_comment(park_id):
     id = request.json["id"]
     comment = db.session.query(Comment).filter(Comment.id == id).one()
-
+    user_query = db.session.query(Comment, User).select_from(Comment).join(User).filter(Comment.id == comment.id).all()
+    comment.username = user_query[0][1].username
+    print('before!!!!!!')
+    print(comment.to_dict())
     if comment:
         comment.commentText = request.json["commentText"]
+        print('after!!!!!!')
+        print(comment.to_dict())
         db.session.commit()
-        return jsonify(comment.to_dict())
+        return comment.to_JSON()
     else:
         return make_response({"errors": ["Edit on non-existent comment"]})
 

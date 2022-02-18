@@ -47,7 +47,7 @@ const CommentCard = ({ comment, parkId }) => {
             </div>
 
             <div>
-                {userId === comment.userId ? editButton : ''}
+                {userId === comment?.userId ? editButton : ''}
                 {showForm &&
                     <form onSubmit={handleSubmit}>
                         <ul>

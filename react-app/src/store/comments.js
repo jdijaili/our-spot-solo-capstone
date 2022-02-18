@@ -79,6 +79,7 @@ export const editComment = ({ id, parkId, userId, reply, comment }) => async (di
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             id,
+            park_id: parkId,
             user_id: userId,
             reply,
             commentText: comment
