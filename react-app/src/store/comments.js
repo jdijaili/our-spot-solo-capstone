@@ -89,6 +89,7 @@ export const editComment = ({ id, parkId, userId, reply, comment }) => async (di
     if (res.ok) {
         const comment = await res.json();
         dispatch(updateComment(comment));
+        return true;
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
@@ -109,8 +110,15 @@ export const deleteComment = ({ parkId, id }) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const comment = await res.json();
         dispatch(trashComment(id))
+        return true;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.'];
     }
 }
 
