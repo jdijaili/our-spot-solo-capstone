@@ -28,8 +28,8 @@ const CommentCard = ({ comment, parkId }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             });
-
-        if (submittedComment) {
+            console.log(submittedComment)
+        if (editedComment) {
             setShowForm(false);
         }
     };
@@ -47,7 +47,7 @@ const CommentCard = ({ comment, parkId }) => {
             </div>
 
             <div>
-                {userId === comment?.userId ? editButton : ''}
+                {userId === comment.userId ? editButton : ''}
                 {showForm &&
                     <form onSubmit={handleSubmit}>
                         <ul>
