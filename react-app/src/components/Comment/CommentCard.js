@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editComment } from '../../store/comments';
+import { deleteComment, editComment } from '../../store/comments';
 
 const CommentCard = ({ comment, parkId }) => {
     const dispatch = useDispatch();
@@ -28,14 +28,27 @@ const CommentCard = ({ comment, parkId }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             });
-            console.log(submittedComment)
+        console.log(submittedComment)
         if (editedComment) {
             setShowForm(false);
         }
     };
 
-    const editButton = (
-        <button onClick={e => setShowForm(true)}>Edit</button>
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        const deleteInfo = {
+            parkId,
+            id: comment.id
+        };
+        
+        await dispatch(deleteComment(deleteInfo));
+    }
+
+    const userButtons = (
+        <div>
+            <button onClick={e => setShowForm(true)}>Edit</button>
+            <button onClick={handleDelete}>Delete</button>
+        </div>
     )
 
     return (
@@ -47,7 +60,7 @@ const CommentCard = ({ comment, parkId }) => {
             </div>
 
             <div>
-                {userId === comment.userId ? editButton : ''}
+                {userId === comment.userId ? userButtons : ''}
                 {showForm &&
                     <form onSubmit={handleSubmit}>
                         <ul>
@@ -61,7 +74,7 @@ const CommentCard = ({ comment, parkId }) => {
                         <button type='submit'>Edit</button>
                         <button onClick={e => setShowForm(false)}>Cancel</button>
                     </form>
-            }
+                }
             </div>
         </div>
     )

@@ -50,11 +50,12 @@ def edit_comment(park_id):
     else:
         return make_response({"errors": ["Edit on non-existent comment"]})
 
-@comment_routes.route('/<int:park_id>', methods=['DELETE'])
-def delete_comment(park_id):
+@comment_routes.route('/', methods=['DELETE'])
+def delete_comment():
     id = request.json["id"]
-    comment = db.session.query(Comment).filter(Comment.id == id).one()
-
+    comment = Comment.query.get(id)
+    print('!!!!!!!!!!!')
+    print(comment)
     if comment:
         db.session.delete(comment)
         db.session.commit()

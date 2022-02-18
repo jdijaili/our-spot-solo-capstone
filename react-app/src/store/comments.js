@@ -101,7 +101,7 @@ export const editComment = ({ id, parkId, userId, reply, comment }) => async (di
 };
 
 export const deleteComment = ({ parkId, id }) => async (dispatch) => {
-    const res = await csrfFetch(`/api/comments/${parkId}`, {
+    const res = await csrfFetch(`/api/comments/`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -112,8 +112,8 @@ export const deleteComment = ({ parkId, id }) => async (dispatch) => {
     if (res.ok) {
         dispatch(trashComment(id))
         return true;
-    } else if (response.status < 500) {
-        const data = await response.json();
+    } else if (res.status < 500) {
+        const data = await res.json();
         if (data.errors) {
             return data.errors;
         }
