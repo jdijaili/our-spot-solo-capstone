@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, jsonify, make_response, request
 from sqlalchemy import JSON
 from app.models import db, Comment, User
