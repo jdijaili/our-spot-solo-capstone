@@ -31,7 +31,7 @@ def post_comment(park_id):
 
         comment.username = user_query[0][1].username
 
-        return comment.to_dict()
+        return comment.to_JSON()
     else:
         return make_response({'errors': 'Error(s) on the comment occured'})
 
