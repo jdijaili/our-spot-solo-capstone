@@ -1,5 +1,9 @@
+import { csrfFetch } from "../helpers";
+
 // ACTIONS
-const LOAD_LISTS = 'comments/LOAD_LISTS';
+const LOAD_LISTS = 'lists/LOAD_LISTS';
+
+const CREATE_LISTS = 'lists/CREATE_LISTS';
 
 // ACTION CREATORS
 const loadLists = (lists) => ({
@@ -7,12 +11,19 @@ const loadLists = (lists) => ({
     lists
 });
 
+const createList = (list) => ({
+    type: CREATE_LISTS,
+    list
+})
+
 // THUNK CREATORS
 export const getLists = () => async (dispatch) => {
-    const res = await fetch('/api/lists/');
+    console.log('before')
+    const res = await fetch(`/api/lists/`);
+    console.log('after')
 
     if (res.ok) {
-        const lists = res.json();
+        const lists = await res.json();
         dispatch(loadLists(lists));
     } else if (res.status < 500) {
         const data = await res.json();
@@ -24,13 +35,18 @@ export const getLists = () => async (dispatch) => {
     }
 };
 
+// export const createList = ({}) => async (dispatch) => {
+//     const res = await csrfFetch('/api/lists/')
+// }
+
 // REDUCER
 const reducer = (state = {}, action) => {
     let updatedState = { ...state };
     switch(action.type) {
         case LOAD_LISTS:
+            console.log(action.lists)
             action.lists.forEach(list => {
-                updatedState[list.id] = list;
+                updatedState[list.id] = list
             });
             return updatedState;
         default:

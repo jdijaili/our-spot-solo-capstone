@@ -12,6 +12,7 @@ import HomeView from './components/HomeView/HomeView';
 import Footer from './components/Footer/Footer';
 import ParkView from './components/ParksView/ParksView';
 import ParkDetailView from './components/ParkDetailView/ParkDetailView';
+import ListDetailView from './components/ListDetailView/ListDetailView';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,6 +47,10 @@ function App() {
         <Route path='/parks/:parkId' exact={true}>
           <ParkDetailView />
         </Route>
+
+        <ProtectedRoute path='/lists' exact={true}>
+          <ListDetailView />
+        </ProtectedRoute>
 
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />

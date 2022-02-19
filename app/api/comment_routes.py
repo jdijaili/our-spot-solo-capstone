@@ -53,8 +53,6 @@ def edit_comment(park_id):
 def delete_comment():
     id = request.json["id"]
     comment = Comment.query.get(id)
-    print('!!!!!!!!!!!')
-    print(comment)
     if comment:
         db.session.delete(comment)
         db.session.commit()
