@@ -14,8 +14,12 @@ def seed_lists():
     )
 
     dolores_park = Park.query.get(1)
-    mission_district.append(dolores_park)
+    alta_plaza = Park.query.get(2)
+    alamo_square = Park.query.get(3)
+    mission_district.parks.append(dolores_park)
     favs.parks.append(dolores_park)
+    favs.parks.append(alta_plaza)
+    favs.parks.append(alamo_square)
 
     db.session.add(mission_district)
     db.session.add(favs)

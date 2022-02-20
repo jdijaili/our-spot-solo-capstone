@@ -17,9 +17,9 @@ const createList = (list) => ({
 })
 
 // THUNK CREATORS
-export const getLists = () => async (dispatch) => {
+export const getLists = (listId) => async (dispatch) => {
     console.log('before')
-    const res = await fetch(`/api/lists/`);
+    const res = await fetch(`/api/lists/${listId}`);
     console.log('after')
 
     if (res.ok) {

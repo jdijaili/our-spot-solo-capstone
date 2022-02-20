@@ -4,13 +4,8 @@ from app.seeds import lists
 
 list_routes = Blueprint('lists', __name__)
 
-@list_routes.route('/')
-def get_lists():
+@list_routes.route('/<int:list_id>')
+def get_lists(list_id):
     print('get route')
-    park_lists = List.query.all()
-    # park_lists = List.query.filter(List.list_id == list_id).all()
-    # park_lists = List.query.filter(List)
-    print(park_lists)
-    print([list.to_JSON() for list in park_lists])
-    # print([list.to_dict() for list in lists])
-    return jsonify([list.to_JSON() for list in park_lists])
+    park_list = List.query.get(list_id)
+    return jsonify([park.to_JSON() for park in park_list.parks])

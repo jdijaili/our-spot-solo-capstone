@@ -48,7 +48,7 @@ function App() {
           <ParkDetailView />
         </Route>
 
-        <ProtectedRoute path='/lists' exact={true}>
+        <ProtectedRoute path='/lists/:listId' exact={true}>
           <ListDetailView />
         </ProtectedRoute>
 
