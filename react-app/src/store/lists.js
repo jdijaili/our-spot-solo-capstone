@@ -49,9 +49,29 @@ export const getList = (listId) => async (dispatch) => {
     }
 };
 
-// export const createList = ({}) => async (dispatch) => {
-//     const res = await csrfFetch('/api/lists/')
-// }
+export const postList = ({ userId, title, description }) => async (dispatch) => {
+    const res = await csrfFetch(`/api/lists/user/${userId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            user_id: userId,
+            title,
+            description
+        })
+    });
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(createList(list));
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.'];
+    }
+}
 
 // REDUCER
 const reducer = (state = {}, action) => {
@@ -67,6 +87,8 @@ const reducer = (state = {}, action) => {
                 updatedState[park.id] = park
             });
             return updatedState;
+        case CREATE_LIST:
+            updatedState[action.list.id] = action.list
         default:
             return updatedState;
     }

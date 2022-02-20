@@ -18,7 +18,7 @@ const ListBrowseView = () => {
         dispatch(getAllLists(userId));
     }, [dispatch]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newList = {
             user_id: userId,
@@ -31,6 +31,12 @@ const ListBrowseView = () => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             });
+
+        if (submittedList) {
+            setTitle('');
+            setDescription('');
+            setShowForm(false);
+        }
     };
 
     const handleCancel = () => {
@@ -68,7 +74,7 @@ const ListBrowseView = () => {
             }
             <div>
                 {lists.map(list => (
-                    <Link to={`/lists/${list.id}`}>
+                    <Link to={`/lists/${list.id}`} key={list.id}>
                         <h3>{list.title}</h3>
                     </Link>
                 ))}
