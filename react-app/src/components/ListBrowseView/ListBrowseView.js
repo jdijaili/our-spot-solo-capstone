@@ -17,7 +17,7 @@ const ListBrowseView = () => {
 
     useEffect(() => {
         dispatch(getAllLists(userId));
-    }, [dispatch]);
+    }, [dispatch, userId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,36 +48,50 @@ const ListBrowseView = () => {
 
     return (
         <div className='list-browse-page'>
-            <div className='header'>
+            <div className='list-browse-header'>
                 <h1>List Browse View</h1>
                 <button
-                className='new-list'
-                onClick={e => setShowForm(true)}
+                    className='new-list'
+                    onClick={e => setShowForm(true)}
                 >New List</button>
             </div>
             {showForm &&
                 <div>
                     <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
                         <input
-                        placeholder='title'
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
+                            placeholder='title'
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
                         />
                         <input
-                        placeholder='description'
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
+                            placeholder='description'
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
                         />
                         <button type='submit'>Create</button>
                         <button onClick={handleCancel}>Cancel</button>
                     </form>
                 </div>
             }
-            <div>
+            <div className='list-card-container'>
                 {lists.map(list => (
                     <Link to={`/lists/${list.id}`} key={list.id}>
-                        <h3>{list.title}</h3>
+                        <div className='list-card'>
+                            <div className='list-card-sparkle'>
+                                <h2>✨</h2>
+                            </div>
+                            <div className='list-card-info'>
+                                <h2>{list.title}</h2>
+                                <h3>{list.description}</h3>
+                            </div>
+                            <div>
+                                <img className='list-card-forward' src='https://res.cloudinary.com/jenn/image/upload/v1645474173/our-spot/icons8-forward-96_d4fpsu.png' alt='forward icon' />
+                            </div>
+                        </div>
                     </Link>
                 ))}
             </div>

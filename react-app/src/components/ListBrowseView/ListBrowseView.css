@@ -2,7 +2,7 @@
     padding: 0 60px;
 }
 
-.header {
+.list-browse-header {
     display: flex;
     justify-content: space-between;
 }
@@ -17,4 +17,16 @@
     border-radius: 50px;
     padding: 8px;
     height: 40px;
+}
+
+.list-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.list-card {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
 }
