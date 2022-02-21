@@ -31,8 +31,8 @@ export const getParks = () => async (dispatch) => {
     }
 };
 
-export const getParksForList = (listId) => async (dispatch) => {
-    const res = await fetch(`/api/lists/${listId}`);
+export const getParksForList = (list_id) => async (dispatch) => {
+    const res = await fetch(`/api/lists/${list_id}/get-parks`);
 
     if (res.ok) {
         const parks = await res.json();

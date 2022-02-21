@@ -14,6 +14,11 @@ def get_all_lists(user_id):
 
 @list_routes.route('/<int:list_id>')
 def get_list(list_id):
+    list = List.query.get(list_id)
+    return list.to_JSON()
+
+@list_routes.route('/<int:list_id>/get-parks')
+def get_parks_for_list(list_id):
     park_list = List.query.get(list_id)
     return jsonify([park.to_JSON() for park in park_list.parks])
 

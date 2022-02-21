@@ -11,7 +11,7 @@ const ListDetailView = () => {
 
     useEffect(() => {
         dispatch(getParksForList(listId));
-        dispatch(getList(listId));
+        // dispatch(getList(listId));
     }, [dispatch]);
 
     return(

@@ -84,9 +84,10 @@ const reducer = (state = {}, action) => {
             });
             return updatedState;
         case LOAD_LIST:
-            action.list.forEach(park => {
-                updatedState[park.id] = park
-            });
+            // action.list.forEach(park => {
+            //     updatedState[park.id] = park
+            // });
+            updatedState[action.list.id] = action.list
             return updatedState;
         case CREATE_LIST:
             updatedState[action.list.id] = action.list
