@@ -50,7 +50,7 @@ export const getList = (listId) => async (dispatch) => {
 };
 
 export const postList = ({ userId, title, description }) => async (dispatch) => {
-    const res = await csrfFetch(`/api/lists/user/${userId}/`, {
+    const res = await csrfFetch(`/api/lists/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -63,6 +63,7 @@ export const postList = ({ userId, title, description }) => async (dispatch) => 
     if (res.ok) {
         const list = await res.json();
         dispatch(createList(list));
+        return true
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
