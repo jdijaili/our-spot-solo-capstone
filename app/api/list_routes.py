@@ -6,6 +6,7 @@ from datetime import datetime
 
 list_routes = Blueprint('lists', __name__)
 
+# list CRUD
 @list_routes.route('/user/<int:user_id>', methods=['GET'])
 def get_all_lists(user_id):
     lists = List.query.filter(List.user_id == user_id)
@@ -53,8 +54,28 @@ def delete_list():
     else:
         return make_response({"errors": ["Delete on non-existent list"]})
 
-
+# list park references
 @list_routes.route('/<int:list_id>')
 def get_list(list_id):
     park_list = List.query.get(list_id)
     return jsonify([park.to_JSON() for park in park_list.parks])
+
+# add park to list
+@list_routes.route('/<int:list_id>', methods=['POST'])
+def add_park_to_list(list_id):
+    list = List.query.get(list_id)
+    park = Park.query.get(request.json['park_id'])
+
+    if list and park:
+        list.parks.append(park)
+        return jsonify([park.to_JSON() for park in list.parks])
+
+
+# # remove park from list
+# @list_routes.route('/<int:list_id>', methods=['DELETE'])
+# def delete_park_from_list(list_id):
+#     # get List
+#     list = List.query.get(list_id)
+#     # get park from list parks attribute
+#     park = list.parks
+#     # remove parks from list parks attribute
