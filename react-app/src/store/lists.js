@@ -50,7 +50,7 @@ export const getList = (listId) => async (dispatch) => {
 };
 
 export const postList = ({ userId, title, description }) => async (dispatch) => {
-    const res = await csrfFetch(`/api/lists/user/${userId}`, {
+    const res = await csrfFetch(`/api/lists/user/${userId}/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

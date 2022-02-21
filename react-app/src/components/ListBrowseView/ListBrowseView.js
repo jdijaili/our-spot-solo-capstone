@@ -1,7 +1,8 @@
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getAllLists } from '../../store/lists';
+import { getAllLists, postList } from '../../store/lists';
 import './ListBrowseView.css'
 
 const ListBrowseView = () => {
@@ -21,12 +22,12 @@ const ListBrowseView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newList = {
-            user_id: userId,
+            userId,
             title,
             description
         };
 
-        const submittedList = await dispatch()
+        const submittedList = await dispatch(postList(newList))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
@@ -57,6 +58,7 @@ const ListBrowseView = () => {
             {showForm &&
                 <div>
                     <form onSubmit={handleSubmit}>
+                    <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
                         <input
                         placeholder='title'
                         value={title}
