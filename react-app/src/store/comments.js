@@ -123,7 +123,7 @@ export const deleteComment = ({ parkId, id }) => async (dispatch) => {
 }
 
 // REDUCER
-const commentsReducer = (state = {}, action) => {
+const reducer = (state = {}, action) => {
     let updatedState = { ...state };
     switch (action.type) {
         case LOAD_COMMENTS:
@@ -143,4 +143,4 @@ const commentsReducer = (state = {}, action) => {
     }
 }
 
-export default commentsReducer;
+export default reducer;

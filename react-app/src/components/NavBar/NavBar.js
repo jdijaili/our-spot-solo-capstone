@@ -14,6 +14,9 @@ const NavBar = () => {
           <NavLink to='/' exact={true} activeClassName='active'>
             Our Spot
           </NavLink>
+          <NavLink to='/parks' exact={true} activeClassName='active'>
+            Explore
+          </NavLink>
         </li>
       </ul>
       <ul className='user-options'>

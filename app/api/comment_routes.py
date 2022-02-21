@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, jsonify, make_response, request
 from sqlalchemy import JSON
 from app.models import db, Comment, User
@@ -32,7 +31,7 @@ def post_comment(park_id):
 
         comment.username = user_query[0][1].username
 
-        return comment.to_dict()
+        return comment.to_JSON()
     else:
         return make_response({'errors': 'Error(s) on the comment occured'})
 
@@ -54,8 +53,6 @@ def edit_comment(park_id):
 def delete_comment():
     id = request.json["id"]
     comment = Comment.query.get(id)
-    print('!!!!!!!!!!!')
-    print(comment)
     if comment:
         db.session.delete(comment)
         db.session.commit()

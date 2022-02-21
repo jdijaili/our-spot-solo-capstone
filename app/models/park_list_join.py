@@ -5,10 +5,10 @@ class Park_List_Join(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     park_id = db.Column(db.Integer, db.ForeignKey('parks.id'), nullable=False)
-    list_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
     notes = db.Column(db.Text)
 
-    def to_JSON(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'park_id': self.park_id,
