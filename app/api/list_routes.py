@@ -28,6 +28,31 @@ def post_list():
     else:
         return make_response({'errors': 'Error(s) on the list occured'})
 
+@list_routes.route('/edit-list', methods=['PUT'])
+def edit_list():
+    id = request.json['id']
+    list = db.session.query(List).filter(List.id == id).one()
+
+    if list:
+        list.title = request.json['title']
+        list.description = request.json['description']
+        db.session.commit()
+        return list.to_JSON()
+    else:
+        return make_response({"errors": ["Edit on non-existent list"]})
+
+@list_routes.route('/delete-list', methods=['DELETE'])
+def delete_list():
+    id = request.json['id']
+    list = List.query.get(id)
+
+    if list:
+        db.session.delete(list)
+        db.session.commit()
+        return {'errors': False}
+    else:
+        return make_response({"errors": ["Delete on non-existent list"]})
+
 
 @list_routes.route('/<int:list_id>')
 def get_list(list_id):
