@@ -1,7 +1,9 @@
 .home {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+    height: 100%;
+    width: 100%;
+    background: url(https://res.cloudinary.com/jenn/image/upload/v1645555686/our-spot/IMG_0989_bzwb6o.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
 }
 
 .home-graphic {
@@ -18,4 +20,8 @@
     align-items: center;
     justify-content: center;
     margin-left: 8px;
+}
+
+#root, body, html {
+    height: 100%;
 }
