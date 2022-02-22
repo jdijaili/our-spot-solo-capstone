@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { editList, getList } from '../../store/lists';
+import { useParams, useHistory } from 'react-router-dom';
+import { deleteList, editList, getList } from '../../store/lists';
 import { getParksForList } from '../../store/parks';
 import ParkCard from '../ParkCard/ParkCard';
 import './ListDetailView.css'
 
 const ListDetailView = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { listId } = useParams();
 
+    const userId = useSelector(state => state.session.user.id);
     const parks = Object.values(useSelector(state => state?.parks));
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
     const id = list[0]?.id;
@@ -52,9 +54,18 @@ const ListDetailView = () => {
         setShowForm(false);
     };
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
 
+        const deletedList = await dispatch(deleteList(listId))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            });
+
+        if (deletedList) {
+            history.push(`/lists/user/${userId}`);
+        }
     };
 
 

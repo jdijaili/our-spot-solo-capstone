@@ -113,11 +113,11 @@ export const editList = ({ id, title, description }) => async (dispatch) => {
     }
 };
 
-export const deleteList = ({ listId }) => async (dispatch) => {
+export const deleteList = (listId) => async (dispatch) => {
     const res = await csrfFetch('/api/lists/delete-list', {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ listId })
+        body: JSON.stringify({ list_id: listId })
     });
 
     if (res.ok) {

@@ -54,7 +54,7 @@ def edit_list():
 
 @list_routes.route('/delete-list', methods=['DELETE'])
 def delete_list():
-    id = request.json['id']
+    id = request.json['list_id']
     list = List.query.get(id)
 
     if list:
