@@ -52,6 +52,11 @@ const ListDetailView = () => {
         setShowForm(false);
     };
 
+    const handleDelete = (e) => {
+        e.preventDefault();
+        
+    };
+
 
     return (
         <>
@@ -59,7 +64,7 @@ const ListDetailView = () => {
                 <h1>{list[0]?.title}</h1>
                 <h3>{list[0]?.description}</h3>
                 <button onClick={e => setShowForm(true)}>Edit List</button>
-                <button>Delete</button>
+                <button onClick={handleDelete}>Delete</button>
 
                 {showForm &&
                     <div>
