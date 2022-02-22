@@ -7,6 +7,8 @@ const LOAD_LIST = 'lists/LOAD_LIST';
 
 const CREATE_LIST = 'lists/CREATE_LIST';
 
+const UPDATE_LIST = 'lists/UPDATE_LIST';
+
 // ACTION CREATORS
 const loadAllLists = (lists) => ({
     type: LOAD_ALL_LISTS,
@@ -21,7 +23,12 @@ const loadList = (list) => ({
 const createList = (list) => ({
     type: CREATE_LIST,
     list
-})
+});
+
+const updateList = (list) => ({
+    type: UPDATE_LIST,
+    list
+});
 
 // THUNK CREATORS
 export const getAllLists = (userId) => async (dispatch) => {
@@ -72,7 +79,32 @@ export const postList = ({ userId, title, description }) => async (dispatch) => 
     } else {
         return ['An error occured. Please try again.'];
     }
-}
+};
+
+export const editList = ({ id, title, description }) => async (dispatch) => {
+    const res = await csrfFetch('/api/lists/edit-list', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id,
+            title,
+            description
+        })
+    });
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(updateList(list));
+        return true;
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occured. Please try again.'];
+    }
+};
 
 // REDUCER
 const reducer = (state = {}, action) => {
@@ -87,6 +119,7 @@ const reducer = (state = {}, action) => {
             updatedState[action.list.id] = action.list
             return updatedState;
         case CREATE_LIST:
+        case UPDATE_LIST:
             updatedState[action.list.id] = action.list
         default:
             return updatedState;
