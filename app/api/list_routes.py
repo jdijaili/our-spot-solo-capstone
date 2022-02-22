@@ -12,6 +12,16 @@ def get_all_lists(user_id):
     lists = List.query.filter(List.user_id == user_id)
     return jsonify([list.to_JSON() for list in lists])
 
+@list_routes.route('/<int:list_id>')
+def get_list(list_id):
+    list = List.query.get(list_id)
+    return list.to_JSON()
+
+@list_routes.route('/<int:list_id>/get-parks')
+def get_parks_for_list(list_id):
+    park_list = List.query.get(list_id)
+    return jsonify([park.to_JSON() for park in park_list.parks])
+
 @list_routes.route('/', methods=['POST'])
 def post_list():
     new_list = List(
@@ -55,12 +65,6 @@ def delete_list():
         return make_response({"errors": ["Delete on non-existent list"]})
 
 # list park references
-@list_routes.route('/<int:list_id>')
-def get_list(list_id):
-    park_list = List.query.get(list_id)
-    return jsonify([park.to_JSON() for park in park_list.parks])
-
-# add park to list
 @list_routes.route('/<int:list_id>', methods=['POST'])
 def add_park_to_list(list_id):
     list = List.query.get(list_id)
