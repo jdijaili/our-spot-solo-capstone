@@ -9,6 +9,8 @@ const CREATE_LIST = 'lists/CREATE_LIST';
 
 const UPDATE_LIST = 'lists/UPDATE_LIST';
 
+const TRASH_LIST = 'lists/TRASH_LIST';
+
 // ACTION CREATORS
 const loadAllLists = (lists) => ({
     type: LOAD_ALL_LISTS,
@@ -28,6 +30,11 @@ const createList = (list) => ({
 const updateList = (list) => ({
     type: UPDATE_LIST,
     list
+});
+
+const trashList = (listId) => ({
+    type: TRASH_LIST,
+    listId
 });
 
 // THUNK CREATORS
@@ -106,21 +113,45 @@ export const editList = ({ id, title, description }) => async (dispatch) => {
     }
 };
 
+export const deleteList = ({ listId }) => async (dispatch) => {
+    const res = await csrfFetch('/api/lists/delete-list', {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ listId })
+    });
+
+    if (res.ok) {
+        dispatch(trashList(listId));
+        return true;
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.'];
+    }
+};
+
 // REDUCER
 const reducer = (state = {}, action) => {
     let updatedState = { ...state };
-    switch(action.type) {
+    switch (action.type) {
         case LOAD_ALL_LISTS:
             action.lists.forEach(list => {
-                updatedState[list.id] = list
+                updatedState[list.id] = list;
             });
             return updatedState;
         case LOAD_LIST:
-            updatedState[action.list.id] = action.list
+            updatedState[action.list.id] = action.list;
             return updatedState;
         case CREATE_LIST:
         case UPDATE_LIST:
-            updatedState[action.list.id] = action.list
+            updatedState[action.list.id] = action.list;
+            return updatedState;
+        case TRASH_LIST:
+            delete updatedState[action.listId];
+            return updatedState;
         default:
             return updatedState;
     }

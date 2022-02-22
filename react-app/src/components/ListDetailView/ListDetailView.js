@@ -14,9 +14,9 @@ const ListDetailView = () => {
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
     const id = list[0]?.id;
 
-    useEffect(async () => {
-        await dispatch(getList(listId));
-        await dispatch(getParksForList(listId));
+    useEffect(() => {
+        dispatch(getList(listId));
+        dispatch(getParksForList(listId));
     }, [dispatch]);
 
 
@@ -54,7 +54,7 @@ const ListDetailView = () => {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        
+
     };
 
 
