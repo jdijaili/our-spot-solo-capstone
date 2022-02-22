@@ -38,10 +38,10 @@ const ListDetailView = () => {
         };
 
         const submittedEditedList = await dispatch(editList(editedList))
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors)
-        });
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            });
 
         if (submittedEditedList) {
             setShowForm(false);
