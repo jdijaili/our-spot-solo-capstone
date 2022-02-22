@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { addListParkRef, getAllLists } from '../../store/lists';
 import { getParks } from '../../store/parks';
 import Comment from '../Comment/Comment';
@@ -9,6 +9,7 @@ import './ParkDetailView.css'
 const ParkDetailView = () => {
     const { parkId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const userId = useSelector(state => state.session.user.id);
     const lists = Object.values(useSelector(state => state.lists));
@@ -38,6 +39,7 @@ const ParkDetailView = () => {
 
         if (addedPark) {
             console.log('success')
+            // TODO: #32 add animation to display success
         }
     };
 
