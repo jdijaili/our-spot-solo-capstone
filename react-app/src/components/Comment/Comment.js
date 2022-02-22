@@ -9,8 +9,7 @@ const Comment = ({ parkId }) => {
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
     const parkComments = comments.filter(comment => comment.parkId === parseInt(parkId));
-    console.log(comments)
-    console.log(parkComments)
+    
     const [errors, setErrors] = useState([]);
     const [comment, setComment] = useState('');
     const [reply, setReply] = useState(null);

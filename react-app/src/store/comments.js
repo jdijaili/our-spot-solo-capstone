@@ -120,7 +120,7 @@ export const deleteComment = ({ parkId, id }) => async (dispatch) => {
     } else {
         return ['An error occurred. Please try again.'];
     }
-}
+};
 
 // REDUCER
 const reducer = (state = {}, action) => {
@@ -136,8 +136,8 @@ const reducer = (state = {}, action) => {
             updatedState[action.comment.id] = action.comment;
             return updatedState;
         case TRASH_COMMENT:
-            delete updatedState[action.id]
-            return updatedState
+            delete updatedState[action.id];
+            return updatedState;
         default:
             return updatedState;
     }

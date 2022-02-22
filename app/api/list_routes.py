@@ -54,7 +54,7 @@ def edit_list():
 
 @list_routes.route('/delete-list', methods=['DELETE'])
 def delete_list():
-    id = request.json['id']
+    id = request.json['list_id']
     list = List.query.get(id)
 
     if list:
@@ -65,21 +65,26 @@ def delete_list():
         return make_response({"errors": ["Delete on non-existent list"]})
 
 # list park references
-@list_routes.route('/<int:list_id>', methods=['POST'])
-def add_park_to_list(list_id):
-    list = List.query.get(list_id)
+@list_routes.route('/add-park-ref', methods=['POST'])
+def add_park_to_list():
+    list = List.query.get(request.json['list_id'])
     park = Park.query.get(request.json['park_id'])
 
     if list and park:
         list.parks.append(park)
-        return jsonify([park.to_JSON() for park in list.parks])
+        db.session.commit()
+        return list.to_JSON()
 
 
-# # remove park from list
-# @list_routes.route('/<int:list_id>', methods=['DELETE'])
-# def delete_park_from_list(list_id):
-#     # get List
-#     list = List.query.get(list_id)
-#     # get park from list parks attribute
-#     park = list.parks
-#     # remove parks from list parks attribute
+# remove park from list
+@list_routes.route('/<int:list_id>', methods=['DELETE'])
+def delete_park_from_list(list_id):
+    list = List.query.get(list_id)
+    park = Park.query.get(request.json['park_id'])
+
+    if list and park:
+        list.parks.remove(park)
+        db.session.commit()
+        return park.to_JSON()
+    else:
+        return make_response({"errors": ["Delete on non-existent park"]})
