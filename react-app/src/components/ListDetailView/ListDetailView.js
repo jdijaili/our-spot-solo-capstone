@@ -13,7 +13,6 @@ const ListDetailView = () => {
     const parks = Object.values(useSelector(state => state?.parks));
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
     const id = list[0]?.id;
-    console.log(id)
 
     useEffect(async () => {
         await dispatch(getList(listId));
@@ -21,8 +20,8 @@ const ListDetailView = () => {
     }, [dispatch]);
 
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(list[0]?.title);
+    const [description, setDescription] = useState(list[0]?.description);
     const [errors, setErrors] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
