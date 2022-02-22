@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteList, editList, getList } from '../../store/lists';
-import { getParksForList } from '../../store/parks';
+import { deleteListParkRef, getParksForList } from '../../store/parks';
 import ParkCard from '../ParkCard/ParkCard';
 import './ListDetailView.css'
 
@@ -70,8 +70,20 @@ const ListDetailView = () => {
 
     const handleParkDelete = async (e) => {
         e.preventDefault();
-        console.log(e.target.value)
+        const payload = {
+            listId,
+            parkId: e.target.value
+        };
 
+        const deletedPark = await dispatch(deleteListParkRef(payload))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            });
+
+        if (deletedPark) {
+            history.push(`/lists/${listId}`);
+        }
     }
 
     return (

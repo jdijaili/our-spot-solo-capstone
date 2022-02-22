@@ -85,6 +85,6 @@ def delete_park_from_list(list_id):
     if list and park:
         list.parks.remove(park)
         db.session.commit()
-        return {'errors': False}
+        return park.to_JSON()
     else:
         return make_response({"errors": ["Delete on non-existent park"]})
