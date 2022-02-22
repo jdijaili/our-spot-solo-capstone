@@ -54,7 +54,7 @@ const ListDetailView = () => {
         setShowForm(false);
     };
 
-    const handleDelete = async (e) => {
+    const handleListDelete = async (e) => {
         e.preventDefault();
 
         const deletedList = await dispatch(deleteList(listId))
@@ -68,6 +68,11 @@ const ListDetailView = () => {
         }
     };
 
+    const handleParkDelete = async (e) => {
+        e.preventDefault();
+        console.log(e.target.value)
+
+    }
 
     return (
         <>
@@ -75,21 +80,21 @@ const ListDetailView = () => {
                 <h1>{list[0]?.title}</h1>
                 <h3>{list[0]?.description}</h3>
                 <button onClick={e => setShowForm(true)}>Edit List</button>
-                <button onClick={handleDelete}>Delete</button>
+                <button onClick={handleListDelete}>Delete</button>
 
                 {showForm &&
                     <div>
                         <form>
                             <input
-                            value={title}
-                            onChange={e => {
-                                setTitle(e.target.value)
-                                console.log(title)
-                            }}
+                                value={title}
+                                onChange={e => {
+                                    setTitle(e.target.value)
+                                    console.log(title)
+                                }}
                             />
                             <input
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
                             />
                             <button onClick={handleEditSubmit}>Submit</button>
                             <button onClick={handleEditCancel}>Cancel</button>
@@ -99,7 +104,10 @@ const ListDetailView = () => {
             </div>
             <div>
                 {parks.map(park => (
-                    <ParkCard park={park} key={park.id} />
+                    <div key={park.id}>
+                        <ParkCard park={park} />
+                        <button value={park.id} onClick={handleParkDelete}>Delete</button>
+                    </div>
                 ))}
             </div>
         </>
