@@ -11,7 +11,7 @@ const CommentCard = ({ comment, parkId }) => {
     if (user) {
         userId = user.id;
     }
-    
+
     const [errors, setErrors] = useState([]);
     const [commentEdit, setCommentEdit] = useState(comment.commentText);
     const [reply, setReply] = useState(null);
@@ -50,16 +50,16 @@ const CommentCard = ({ comment, parkId }) => {
     }
 
     const userButtons = (
-        <div>
-            <button onClick={e => setShowForm(true)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+        <div className='comment-button-container'>
+            <button className='comment-button' onClick={e => setShowForm(true)}>Edit</button>
+            <button className='comment-button' onClick={handleDelete}>Delete</button>
         </div>
     )
 
     return (
         <div>
-            <div>
-                <p>{comment.username}: {commentUpToDate.commentText}</p>
+            <div className='comment-container'>
+                <p className='comment-text'>{comment.username}: {commentUpToDate.commentText}</p>
                 <div>
                 </div>
             </div>
@@ -76,8 +76,10 @@ const CommentCard = ({ comment, parkId }) => {
                             onChange={e => setCommentEdit(e.target.value)}
 
                         />
-                        <button type='submit'>Edit</button>
-                        <button onClick={e => setShowForm(false)}>Cancel</button>
+                        <div className='comment-button-container'>
+                            <button className='comment-button' type='submit'>Submit</button>
+                            <button className='comment-button' onClick={e => setShowForm(false)}>Cancel</button>
+                        </div>
                     </form>
                 }
             </div>

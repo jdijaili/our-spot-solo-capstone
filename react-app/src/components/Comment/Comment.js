@@ -54,7 +54,7 @@ const Comment = ({ parkId }) => {
                 <CommentCard comment={comment} parkId={parkId} key={comment.id} />
             ))}
             {userId &&
-                <form onSubmit={handleSubmit}>
+                <form className='new-comment-container' onSubmit={handleSubmit}>
                     <h3>New Comment</h3>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -64,8 +64,10 @@ const Comment = ({ parkId }) => {
                         onChange={e => setComment(e.target.value)}
                         placeholder='Add a comment...'
                     />
-                    <button type='submit'>Add</button>
-                    <button onClick={handleCancel}>Cancel</button>
+                    <div className='new-comment-buttons'>
+                        <button className='comment-button' type='submit'>Add</button>
+                        <button className='comment-button' onClick={handleCancel}>Cancel</button>
+                    </div>
                 </form>
             }
         </div>
