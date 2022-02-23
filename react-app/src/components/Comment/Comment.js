@@ -9,7 +9,12 @@ const Comment = ({ parkId }) => {
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
     const parkComments = comments.filter(comment => comment.parkId === parseInt(parkId));
-    
+
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
+
     const [errors, setErrors] = useState([]);
     const [comment, setComment] = useState('');
     const [reply, setReply] = useState(null);
@@ -46,21 +51,23 @@ const Comment = ({ parkId }) => {
     return (
         <div>
             {parkComments.map(comment => (
-                <CommentCard comment={comment} parkId={parkId} key={comment.id}/>
+                <CommentCard comment={comment} parkId={parkId} key={comment.id} />
             ))}
-            <h3>New Comment</h3>
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <input
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
-                    placeholder='Add a comment...'
-                />
-                <button type='submit'>Add</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </form>
+            {userId &&
+                <form onSubmit={handleSubmit}>
+                    <h3>New Comment</h3>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                    <input
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
+                        placeholder='Add a comment...'
+                    />
+                    <button type='submit'>Add</button>
+                    <button onClick={handleCancel}>Cancel</button>
+                </form>
+            }
         </div>
     )
 };

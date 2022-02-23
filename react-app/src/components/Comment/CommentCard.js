@@ -4,9 +4,14 @@ import { deleteComment, editComment } from '../../store/comments';
 
 const CommentCard = ({ comment, parkId }) => {
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.session.user.id);
+    const user = useSelector(state => state.session.user);
     const commentUpToDate = Object.values(useSelector(state => state.comments)).filter(stateComment => stateComment.id === comment.id)[0];
 
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
+    
     const [errors, setErrors] = useState([]);
     const [commentEdit, setCommentEdit] = useState(comment.commentText);
     const [reply, setReply] = useState(null);
@@ -40,7 +45,7 @@ const CommentCard = ({ comment, parkId }) => {
             parkId,
             id: comment.id
         };
-        
+
         await dispatch(deleteComment(deleteInfo));
     }
 
