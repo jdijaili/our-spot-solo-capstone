@@ -1,0 +1,11 @@
+.four-img {
+    position: static;
+    height: 100%;
+    width: 100%;
+}
+
+.four-content {
+    position: absolute;
+    top: 400px;
+    left: 150px;
+}

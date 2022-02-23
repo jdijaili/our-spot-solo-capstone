@@ -1,6 +1,8 @@
 body {
-    background-color: darkseagreen;
+    background: rgb(193, 198, 122);
+    background: linear-gradient(180deg, rgba(193, 198, 122, 1) 0%, rgba(147, 188, 143, 1) 52%);
     min-width: 1400px;
+    margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {

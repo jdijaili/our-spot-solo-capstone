@@ -6,8 +6,8 @@
 
 .home-content {
     position: absolute;
-    top: 350px;
-    left: 100px;
+    top: 480px;
+    left: 175px;
     margin-left: 8px;
     display: flex;
     flex-direction: column;
@@ -21,10 +21,22 @@
 
 .home-explore-button {
     font-family: monospace;
-    font-size: 16px;
+    font-size: 23px;
     background-color: inherit;
     border: 1px solid black;
     border-radius: 50px;
     padding: 8px;
     margin-top: 10px;
+}
+
+.home-explore-button:hover {
+    cursor: pointer;
+}
+
+.home-welcome-header {
+    font-size: 50px;
+}
+
+.home-welcome-text {
+    font-size: 28px;
 }

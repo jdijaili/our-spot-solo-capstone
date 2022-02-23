@@ -43,25 +43,27 @@ const ParkDetailView = () => {
         }
     };
 
-    return(
+    return (
         <>
             <h1>{selectedPark?.name}</h1>
             <h3>{selectedPark?.description}</h3>
-            <img src={selectedPark?.imageURL} alt={selectedPark?.name}/>
-            <div>
-                <h2>Add to list</h2>
-                <form onSubmit={handleSubmit}>
-                    <select onChange={e => setListId(e.target.value)}>
-                        {lists.map(list => (
-                            <option value={list.id} key={list.id}>{list.title}</option>
-                        ))}
-                    </select>
-                    <button type='submit'>Add</button>
-                </form>
-            </div>
+            <img src={selectedPark?.imageURL} alt={selectedPark?.name} />
+            {userId &&
+                <div>
+                    <h2>Add to list</h2>
+                    <form onSubmit={handleSubmit}>
+                        <select onChange={e => setListId(e.target.value)}>
+                            {lists.map(list => (
+                                <option value={list.id} key={list.id}>{list.title}</option>
+                            ))}
+                        </select>
+                        <button type='submit'>Add</button>
+                    </form>
+                </div>
+            }
             <div>
                 <h2>Comments</h2>
-                <Comment parkId={parkId}/>
+                <Comment parkId={parkId} />
             </div>
 
         </>
