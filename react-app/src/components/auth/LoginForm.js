@@ -32,6 +32,14 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+  const loginValidation = () => {
+    if (email.includes(' ')) {
+      setErrors(['Spaces are not a valid character']);
+    } else {
+      setErrors([]);
+    }
+  }
+
   return (
     <div className='login-page'>
       <div className='login-content'>
@@ -48,7 +56,9 @@ const LoginForm = () => {
               type='text'
               placeholder='Email'
               value={email}
+              required
               onChange={updateEmail}
+              onBlur={loginValidation}
             />
           </div>
           <div>
@@ -56,6 +66,7 @@ const LoginForm = () => {
               name='password'
               type='password'
               placeholder='Password'
+              required
               value={password}
               onChange={updatePassword}
             />
