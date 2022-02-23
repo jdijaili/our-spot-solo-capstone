@@ -1,31 +1,41 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import './HomeView.css'
 
 const HomeView = () => {
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
 
     const logged_in = (
         <div className='home'>
-            <div className='home-graphic'>
-                <img src='https://res.cloudinary.com/jenn/image/upload/v1644994888/our-spot/104-1041921_sticker-bonsai-chic-ambiance-sticker-kc-9364-bonsai_okpwjq.png' alt='bonsai tree'/>
-            </div>
             <div className='home-content'>
-                <h1>Welcome to Our Spot</h1>
-                <p>caught a vibe</p>
-                <p>baby are you coming for the ride</p>
+                <h1 className='home-welcome-header'>Welcome to Our Spot</h1>
+                <p className='home-welcome-text'>we caught a vibe, baby are you coming for the ride</p>
+                <Link to='/parks'>
+                    <button className='home-explore-button'>Explore Parks</button>
+                </Link>
+            </div>
+            <div>
+                <img className='home-image' src='https://res.cloudinary.com/jenn/image/upload/v1645572949/our-spot/Untitled_Artwork_3_myamif.png' alt='park' />
             </div>
         </div>
     )
 
     const splash = (
-        <>
-            <div>
-                <h1>Sign up or Log in to explore parks in your area!</h1>
+        <div className='home'>
+            <div className='home-content'>
+                <h1 className='home-welcome-header'>Welcome to Our Spot</h1>
+                <p className='home-welcome-text'>Sign in or start exploring local parks!</p>
+                <Link to='/parks'>
+                    <button className='home-explore-button'>Explore Parks</button>
+                </Link>
             </div>
-        </>
+            <div>
+                <img className='home-image' src='https://res.cloudinary.com/jenn/image/upload/v1645572949/our-spot/Untitled_Artwork_3_myamif.png' alt='park' />
+            </div>
+        </div>
     )
 
-    return(
+    return (
         <div>
             {user ? logged_in : splash}
         </div>

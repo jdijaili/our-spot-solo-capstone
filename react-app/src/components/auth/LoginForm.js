@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './LoginForm.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -12,9 +13,10 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      setErrors(['Credentials are incorrect. Please try again.']);
     }
   };
 
@@ -30,35 +32,52 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+  const loginValidation = () => {
+    if (email.includes(' ')) {
+      setErrors(['Spaces are not a valid character']);
+    } else {
+      setErrors([]);
+    }
+  }
+
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className='login-page'>
+      <div className='login-content'>
+        <h2>Login</h2>
+        <form onSubmit={onLogin} className='login-form'>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <input
+              name='email'
+              type='text'
+              placeholder='Email'
+              value={email}
+              required
+              onChange={updateEmail}
+              onBlur={loginValidation}
+            />
+          </div>
+          <div>
+            <input
+              name='password'
+              type='password'
+              placeholder='Password'
+              required
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button type='submit' className='login-button'>Login</button>
+        </form>
       </div>
       <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
+        <img className='home-image' src='https://res.cloudinary.com/jenn/image/upload/v1645572949/our-spot/Untitled_Artwork_3_myamif.png' alt='park' />
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+    </div>
   );
 };
 
