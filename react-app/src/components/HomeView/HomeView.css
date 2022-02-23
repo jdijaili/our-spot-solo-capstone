@@ -1,27 +1,30 @@
 .home {
+    position: static;
     height: 100%;
     width: 100%;
-    background: url(https://res.cloudinary.com/jenn/image/upload/v1645555686/our-spot/IMG_0989_bzwb6o.png);
-    background-size: 90%;
-    background-repeat: no-repeat;
-}
-
-.home-graphic {
-    margin-right: 8px;
-}
-
-.home-graphic img {
-    height: 500px;
 }
 
 .home-content {
+    position: absolute;
+    top: 350px;
+    left: 100px;
+    margin-left: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-left: 8px;
 }
 
-#root, body, html {
-    height: 100%;
+.home-image {
+    width: 100%;
+    height: 10%;
+}
+
+.home-explore-button {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+    margin-top: 10px;
 }
