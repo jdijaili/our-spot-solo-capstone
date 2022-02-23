@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 100px;
+    padding: 60px;
     border: 2px dashed black;
     border-radius: 5%;
 }
@@ -16,4 +16,13 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+
+.signup-button {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
 }
