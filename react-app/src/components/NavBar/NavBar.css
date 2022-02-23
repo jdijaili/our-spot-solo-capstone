@@ -37,6 +37,10 @@ nav button {
     align-items: center;
 }
 
+.site-options li {
+    margin-right: 20px;
+}
+
 .user-options {
     display: flex;
     list-style: none;

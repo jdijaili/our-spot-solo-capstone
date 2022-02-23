@@ -14,16 +14,25 @@ const NavBar = () => {
           <NavLink to='/' exact={true} activeClassName='active'>
             Our Spot
           </NavLink>
+        </li>
+        <li>
           <NavLink to='/parks' exact={true} activeClassName='active'>
             Explore
           </NavLink>
         </li>
+        {user ?
+          <li>
+            <NavLink to={`/lists/user/${user.id}`}>
+              My Lists
+            </NavLink>
+          </li>
+          : ''}
       </ul>
       <ul className='user-options'>
-          {(user) ? <NavLink className='logged-in' to={`/users/${user.id}`}>Hey, {user.username}!</NavLink> : ''}
-          {(user) ? <div className='logged-in'></div> : ''}
-          {(user) ? <LogoutButton /> : <LoginSignup />}
-        </ul>
+        {(user) ? <NavLink className='logged-in' to={`/users/${user.id}`}>Hey, {user.username}!</NavLink> : ''}
+        {(user) ? <div className='logged-in'></div> : ''}
+        {(user) ? <LogoutButton /> : <LoginSignup />}
+      </ul>
     </nav>
   );
 }
