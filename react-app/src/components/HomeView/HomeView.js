@@ -23,8 +23,8 @@ const HomeView = () => {
     const splash = (
         <div className='home'>
             <div className='home-content'>
-                <h1>Welcome to Our Spot</h1>
-                <p>Sign in or start exploring local parks!</p>
+                <h1 className='home-welcome-header'>Welcome to Our Spot</h1>
+                <p className='home-welcome-text'>Sign in or start exploring local parks!</p>
                 <Link to='/parks'>
                     <button className='home-explore-button'>Explore Parks</button>
                 </Link>
