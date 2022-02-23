@@ -13,3 +13,14 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: monospace;
 }
+
+input {
+    font-family: monospace;
+    background-color: #EFE9F4;
+    border: 1px solid black;
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid rgb(212, 147, 61);
+  }
