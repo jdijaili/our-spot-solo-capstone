@@ -11,10 +11,15 @@ const ParkDetailView = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const userId = useSelector(state => state.session.user.id);
+    const user = useSelector(state => state.session.user);
     const lists = Object.values(useSelector(state => state.lists));
     const parks = Object.values(useSelector(state => state.parks));
     const selectedPark = parks.filter(park => park.id === parseInt(parkId))[0];
+
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
 
     const [listId, setListId] = useState(lists[0]?.id);
     const [errors, setErrors] = useState([]);
