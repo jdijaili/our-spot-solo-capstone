@@ -44,6 +44,16 @@ const ListBrowseView = () => {
         setTitle('');
         setDescription('');
         setShowForm(false);
+    };
+
+    const handleNewListClick = () => {
+        if (showForm === false) {
+            setShowForm(true);
+        } else if (showForm === true) {
+            setTitle('');
+            setDescription('');
+            setShowForm(false);
+        }
     }
 
     return (
@@ -52,7 +62,7 @@ const ListBrowseView = () => {
                 <h1>List Browse View</h1>
                 <button
                     className='new-list'
-                    onClick={e => setShowForm(true)}
+                    onClick={handleNewListClick}
                 >New List</button>
             </div>
             {showForm &&
