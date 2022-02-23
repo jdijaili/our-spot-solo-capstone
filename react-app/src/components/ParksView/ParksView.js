@@ -14,18 +14,18 @@ const ParkView = () => {
     }, [dispatch]);
 
     return (
-        <>
-            <div>
+        <div className='parks-browse-page'>
+            <div className='parks-browse-header'>
                 <h1>- Explore your local parks -</h1>
             </div>
-            <div>
+            <div className='parks-browse-cards'>
                 {parks.map(park => (
                     <div key={park.id}>
                         <ParkCard park={park} />
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 };
 
