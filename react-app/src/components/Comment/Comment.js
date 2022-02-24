@@ -23,6 +23,14 @@ const Comment = ({ parkId }) => {
         dispatch(getComments(parkId))
     }, [dispatch]);
 
+    const commentValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['This field must not be empty']);
+        } else {
+            setErrors([]);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newComment = {
@@ -61,7 +69,9 @@ const Comment = ({ parkId }) => {
                     </ul>
                     <input
                         value={comment}
+                        required
                         onChange={e => setComment(e.target.value)}
+                        onBlur={commentValidation}
                         placeholder='Add a comment...'
                     />
                     <div className='new-comment-buttons'>
