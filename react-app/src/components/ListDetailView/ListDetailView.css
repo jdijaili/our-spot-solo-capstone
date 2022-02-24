@@ -39,6 +39,11 @@
     width: 1400px;
 }
 
+.edit-container {
+    display: flex;
+    justify-content: center;
+}
+
 .edit-form-container {
     display: flex;
     flex-direction: column;

@@ -143,31 +143,32 @@ const ListDetailView = () => {
                         <button className='mod-list-button' onClick={handleListDelete}>Delete List</button>
                     </div>
                 </div>
-
-                {showForm &&
-                    <div className='edit-form-container'>
-                        <h3>Edit List</h3>
-                        <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                        </ul>
-                        <form className='edit-form'>
-                            <input
-                                value={title}
-                                onChange={e => setTitle(e.target.value)}
-                                onBlur={titleValidation}
-                            />
-                            <input
-                                type='text'
-                                value={description}
-                                onChange={e => setDescription(e.target.value)}
-                            />
-                            <div>
-                                <button className='edit-form-buttons' onClick={handleEditSubmit}>Submit</button>
-                                <button className='edit-form-buttons' onClick={handleEditCancel}>Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                }
+                <div className='edit-container'>
+                    {showForm &&
+                        <div className='edit-form-container'>
+                            <h3>Edit List</h3>
+                            <ul>
+                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                            <form className='edit-form'>
+                                <input
+                                    value={title}
+                                    onChange={e => setTitle(e.target.value)}
+                                    onBlur={titleValidation}
+                                />
+                                <input
+                                    type='text'
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                />
+                                <div>
+                                    <button className='edit-form-buttons' onClick={handleEditSubmit}>Submit</button>
+                                    <button className='edit-form-buttons' onClick={handleEditCancel}>Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                </div>
             </div>
             {parks.length ? parksMap : noParks}
         </div>
