@@ -65,28 +65,33 @@ const ListBrowseView = () => {
                     onClick={handleNewListClick}
                 >New List</button>
             </div>
-            {showForm &&
-                <div>
-                    <form onSubmit={handleSubmit}>
+            <div className='new-list-container'>
+                {showForm &&
+                    <div className='new-list-form-container'>
+                        <h3>New List</h3>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
-                        <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
-                        <input
-                            placeholder='title'
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                        />
-                        <input
-                            placeholder='description'
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
-                        />
-                        <button type='submit'>Create</button>
-                        <button onClick={handleCancel}>Cancel</button>
-                    </form>
-                </div>
-            }
+                        <form className='new-list-form' onSubmit={handleSubmit}>
+                            <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
+                            <input
+                                placeholder='title'
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
+                            />
+                            <input
+                                placeholder='description'
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                            />
+                            <div>
+                                <button className='new-list-form-buttons' type='submit'>Create</button>
+                                <button className='new-list-form-buttons' onClick={handleCancel}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
             <div className='list-card-container'>
                 {lists.map(list => (
                     <Link to={`/lists/${list.id}`} key={list.id}>

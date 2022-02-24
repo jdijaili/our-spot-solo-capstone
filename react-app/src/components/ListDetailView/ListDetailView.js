@@ -105,7 +105,7 @@ const ListDetailView = () => {
                             <button className='park-delete-button' value={park.id} onClick={handleParkDelete}>X</button>
                         </div>
                     </div>
-                    <ParkCard park={park} className='park-card-comp'/>
+                    <ParkCard park={park} className='park-card-comp' />
                 </div>
             ))}
         </div>
@@ -136,8 +136,11 @@ const ListDetailView = () => {
 
                 {showForm &&
                     <div className='edit-form-container'>
+                        <h3>Edit List</h3>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
                         <form className='edit-form'>
-                            <h3>Edit List</h3>
                             <input
                                 value={title}
                                 onChange={e => {
