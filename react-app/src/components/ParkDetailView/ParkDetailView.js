@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { addListParkRef, getAllLists } from '../../store/lists';
 import { getParks } from '../../store/parks';
 import Comment from '../Comment/Comment';
@@ -9,7 +9,6 @@ import './ParkDetailView.css'
 const ParkDetailView = () => {
     const { parkId } = useParams();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const user = useSelector(state => state.session.user);
     const lists = Object.values(useSelector(state => state.lists));
@@ -27,7 +26,7 @@ const ParkDetailView = () => {
     useEffect(() => {
         dispatch(getParks());
         dispatch(getAllLists(userId))
-    }, [dispatch]);
+    }, [dispatch, userId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -21,7 +21,7 @@ const Comment = ({ parkId }) => {
 
     useEffect(() => {
         dispatch(getComments(parkId))
-    }, [dispatch]);
+    }, [dispatch, parkId]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

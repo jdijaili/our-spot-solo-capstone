@@ -19,7 +19,7 @@ const ListDetailView = () => {
     useEffect(() => {
         dispatch(getList(listId));
         dispatch(getParksForList(listId));
-    }, [dispatch]);
+    }, [dispatch, listId]);
 
 
     const [title, setTitle] = useState(list[0]?.title);
