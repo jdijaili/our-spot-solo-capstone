@@ -61,3 +61,52 @@
     border-radius: 10px;
     margin-right: 5px;
 }
+
+.explore-parks-button {
+    font-family: monospace;
+    font-size: 18px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.no-parks-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.park-delete-button {
+    position: relative;
+    right: -8px;
+    bottom: -8px;
+    background-color: rgb(221, 120, 120);
+    border: 1px solid rgb(168, 15, 15);
+    border-radius: 50%;
+    color: rgb(168, 15, 15);
+    justify-self: flex-end;
+}
+
+.park-delete-button:hover {
+    cursor: pointer;
+    border: 2px solid rgb(211, 19, 19);
+}
+
+/* .park-delete-button:hover + .park-card-comp {
+    box-shadow: 0 0 5px red;
+} */
+
+.park-delete-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.park-card-individual {
+    padding-right: 8px;
+}
