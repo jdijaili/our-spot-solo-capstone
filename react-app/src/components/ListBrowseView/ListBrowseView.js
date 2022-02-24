@@ -54,7 +54,15 @@ const ListBrowseView = () => {
             setDescription('');
             setShowForm(false);
         }
-    }
+    };
+
+    const titleValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['Title must not be empty']);
+        } else {
+            setErrors([]);
+        }
+    };
 
     return (
         <div className='list-browse-page'>
@@ -77,10 +85,12 @@ const ListBrowseView = () => {
                             <input
                                 placeholder='title'
                                 value={title}
+                                required
                                 onChange={e => setTitle(e.target.value)}
+                                onBlur={titleValidation}
                             />
                             <input
-                                placeholder='description'
+                                placeholder='description (optional)'
                                 value={description}
                                 onChange={e => setDescription(e.target.value)}
                             />

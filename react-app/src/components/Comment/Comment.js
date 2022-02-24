@@ -23,14 +23,6 @@ const Comment = ({ parkId }) => {
         dispatch(getComments(parkId))
     }, [dispatch]);
 
-    const commentValidation = (e) => {
-        if (e.target.value.length === 0) {
-            setErrors(['This field must not be empty']);
-        } else {
-            setErrors([]);
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newComment = {
@@ -54,6 +46,14 @@ const Comment = ({ parkId }) => {
     const handleCancel = (e) => {
         e.preventDefault();
         setComment('');
+    };
+
+    const commentValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['This field must not be empty']);
+        } else {
+            setErrors([]);
+        }
     };
 
     return (
