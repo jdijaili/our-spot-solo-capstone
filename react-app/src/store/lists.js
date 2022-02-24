@@ -169,10 +169,11 @@ const reducer = (state = {}, action) => {
     let updatedState = { ...state };
     switch (action.type) {
         case LOAD_ALL_LISTS:
+            let cleanState = {};
             action.lists.forEach(list => {
-                updatedState[list.id] = list;
+                cleanState[list.id] = list;
             });
-            return updatedState;
+            return cleanState;
         case LOAD_LIST:
             updatedState[action.list.id] = action.list;
             return updatedState;
