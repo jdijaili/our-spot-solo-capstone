@@ -9,7 +9,7 @@
 }
 
 .park-card-img {
-    width: 75%;
+    width: 280px;
     height: 100%;
     object-fit: cover;
     margin: 0;
@@ -29,4 +29,9 @@
 
 .park-info>h2 {
     font-size: 15px;
+}
+
+.park-card>a {
+    text-decoration: none;
+    color: black;
 }

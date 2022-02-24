@@ -1,0 +1,28 @@
+.signup-content {
+    position: absolute;
+    top: 430px;
+    left: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px;
+    border: 2px dashed black;
+    border-radius: 5%;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.signup-button {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+}

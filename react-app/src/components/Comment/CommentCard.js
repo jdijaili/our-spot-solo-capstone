@@ -4,8 +4,13 @@ import { deleteComment, editComment } from '../../store/comments';
 
 const CommentCard = ({ comment, parkId }) => {
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.session.user.id);
+    const user = useSelector(state => state.session.user);
     const commentUpToDate = Object.values(useSelector(state => state.comments)).filter(stateComment => stateComment.id === comment.id)[0];
+
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
 
     const [errors, setErrors] = useState([]);
     const [commentEdit, setCommentEdit] = useState(comment.commentText);
@@ -40,21 +45,21 @@ const CommentCard = ({ comment, parkId }) => {
             parkId,
             id: comment.id
         };
-        
+
         await dispatch(deleteComment(deleteInfo));
     }
 
     const userButtons = (
-        <div>
-            <button onClick={e => setShowForm(true)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+        <div className='comment-button-container'>
+            <button className='comment-button' onClick={e => setShowForm(true)}>Edit</button>
+            <button className='comment-button' onClick={handleDelete}>Delete</button>
         </div>
     )
 
     return (
         <div>
-            <div>
-                <p>{comment.username}: {commentUpToDate.commentText}</p>
+            <div className='comment-container'>
+                <p className='comment-text'>{comment.username}: {commentUpToDate.commentText}</p>
                 <div>
                 </div>
             </div>
@@ -71,8 +76,10 @@ const CommentCard = ({ comment, parkId }) => {
                             onChange={e => setCommentEdit(e.target.value)}
 
                         />
-                        <button type='submit'>Edit</button>
-                        <button onClick={e => setShowForm(false)}>Cancel</button>
+                        <div className='comment-button-container'>
+                            <button className='comment-button' type='submit'>Submit</button>
+                            <button className='comment-button' onClick={e => setShowForm(false)}>Cancel</button>
+                        </div>
                     </form>
                 }
             </div>

@@ -1,0 +1,44 @@
+.comment-button {
+    font-family: monospace;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.comment-container {
+    border-top: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.comment-button-container {
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+
+.comment-text {
+    margin-bottom: 5px;
+}
+
+.comment-form {
+    display: flex;
+    align-items: center;
+}
+
+.comment-form-buttons {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+.new-comment-container {
+    border-top: 1px solid black;
+    margin-top: 20px;
+}
+
+.new-comment-buttons {
+    margin-top: 8px;
+}

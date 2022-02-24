@@ -11,10 +11,15 @@ const ParkDetailView = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const userId = useSelector(state => state.session.user.id);
+    const user = useSelector(state => state.session.user);
     const lists = Object.values(useSelector(state => state.lists));
     const parks = Object.values(useSelector(state => state.parks));
     const selectedPark = parks.filter(park => park.id === parseInt(parkId))[0];
+
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
 
     const [listId, setListId] = useState(lists[0]?.id);
     const [errors, setErrors] = useState([]);
@@ -44,29 +49,37 @@ const ParkDetailView = () => {
     };
 
     return (
-        <>
-            <h1>{selectedPark?.name}</h1>
-            <h3>{selectedPark?.description}</h3>
-            <img src={selectedPark?.imageURL} alt={selectedPark?.name} />
-            {userId &&
-                <div>
-                    <h2>Add to list</h2>
-                    <form onSubmit={handleSubmit}>
-                        <select onChange={e => setListId(e.target.value)}>
-                            {lists.map(list => (
-                                <option value={list.id} key={list.id}>{list.title}</option>
-                            ))}
-                        </select>
-                        <button type='submit'>Add</button>
-                    </form>
+        <div className='park-detail-page'>
+            <div className='park-detail-container'>
+                <div className='park-detail-info'>
+                    <h1>{selectedPark?.name}</h1>
+                    <h3>{selectedPark?.description}</h3>
+                    <div className='park-detai-image-container'>
+                        <img className='park-detail-image' src={selectedPark?.imageURL} alt={selectedPark?.name} />
+                    </div>
                 </div>
-            }
-            <div>
-                <h2>Comments</h2>
-                <Comment parkId={parkId} />
+                <div className='list-comment-container'>
+                    <div className='comments-container'>
+                        <h2>Comments</h2>
+                        <Comment parkId={parkId} />
+                    </div>
+                    {userId &&
+                        <div className='park-list-container'>
+                            <h2>Add to list</h2>
+                            <form className='park-list-form' onSubmit={handleSubmit}>
+                                <select onChange={e => setListId(e.target.value)}>
+                                    {lists.map(list => (
+                                        <option value={list.id} key={list.id}>{list.title}</option>
+                                    ))}
+                                </select>
+                                <button className='park-list-button' type='submit'>Add</button>
+                            </form>
+                        </div>
+                    }
+                </div>
             </div>
 
-        </>
+        </div>
     )
 };
 

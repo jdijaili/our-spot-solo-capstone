@@ -9,7 +9,12 @@ const Comment = ({ parkId }) => {
     const user = useSelector(state => state.session.user);
     const comments = Object.values(useSelector(state => state.comments));
     const parkComments = comments.filter(comment => comment.parkId === parseInt(parkId));
-    
+
+    let userId;
+    if (user) {
+        userId = user.id;
+    }
+
     const [errors, setErrors] = useState([]);
     const [comment, setComment] = useState('');
     const [reply, setReply] = useState(null);
@@ -43,24 +48,38 @@ const Comment = ({ parkId }) => {
         setComment('');
     };
 
+    const commentValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['This field must not be empty']);
+        } else {
+            setErrors([]);
+        }
+    };
+
     return (
         <div>
             {parkComments.map(comment => (
-                <CommentCard comment={comment} parkId={parkId} key={comment.id}/>
+                <CommentCard comment={comment} parkId={parkId} key={comment.id} />
             ))}
-            <h3>New Comment</h3>
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <input
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
-                    placeholder='Add a comment...'
-                />
-                <button type='submit'>Add</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </form>
+            {userId &&
+                <form className='new-comment-container' onSubmit={handleSubmit}>
+                    <h3>New Comment</h3>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                    <input
+                        value={comment}
+                        required
+                        onChange={e => setComment(e.target.value)}
+                        onBlur={commentValidation}
+                        placeholder='Add a comment...'
+                    />
+                    <div className='new-comment-buttons'>
+                        <button className='comment-button' type='submit'>Add</button>
+                        <button className='comment-button' onClick={handleCancel}>Cancel</button>
+                    </div>
+                </form>
+            }
         </div>
     )
 };

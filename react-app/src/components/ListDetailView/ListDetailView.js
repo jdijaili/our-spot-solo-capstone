@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { deleteList, editList, getList } from '../../store/lists';
 import { deleteListParkRef, getParksForList } from '../../store/parks';
 import ParkCard from '../ParkCard/ParkCard';
@@ -86,43 +86,92 @@ const ListDetailView = () => {
         }
     }
 
-    return (
-        <>
-            <div>
-                <h1>{list[0]?.title}</h1>
-                <h3>{list[0]?.description}</h3>
-                <button onClick={e => setShowForm(true)}>Edit List</button>
-                <button onClick={handleListDelete}>Delete</button>
+    const editAndDeleteClick = () => {
+        if (showForm === false) {
+            setShowForm(true);
+        } else if (showForm === true) {
+            setTitle(list[0]?.title);
+            setDescription(list[0]?.description);
+            setShowForm(false);
+        }
+    }
 
-                {showForm &&
+    const parksMap = (
+        <div className='parks-browse-cards'>
+            {parks.map(park => (
+                <div key={park.id} className='park-card-individual'>
+                    <div className='park-delete-button-container'>
+                        <div>
+                            <button className='park-delete-button' value={park.id} onClick={handleParkDelete}>X</button>
+                        </div>
+                    </div>
+                    <ParkCard park={park} className='park-card-comp' />
+                </div>
+            ))}
+        </div>
+    )
+
+    const noParks = (
+        <div className='no-parks-block'>
+            <h2>There are no parks to display</h2>
+            <Link to='/parks'>
+                <button className='explore-parks-button'>Explore Parks</button>
+            </Link>
+        </div>
+    )
+
+    const titleValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['Title must not be empty']);
+        } else if (e.target.value.length > 40) {
+            setErrors(['Title must not be greater than 40 characters']);
+        } else {
+            setErrors([]);
+        }
+    };
+
+    return (
+        <div className='list-detail-page'>
+            <div className='list-header'>
+                <div className='list-detail-header'>
                     <div>
-                        <form>
-                            <input
-                                value={title}
-                                onChange={e => {
-                                    setTitle(e.target.value)
-                                    console.log(title)
-                                }}
-                            />
-                            <input
-                                value={description}
-                                onChange={e => setDescription(e.target.value)}
-                            />
-                            <button onClick={handleEditSubmit}>Submit</button>
-                            <button onClick={handleEditCancel}>Cancel</button>
-                        </form>
+                        <h1>{list[0]?.title}</h1>
+                        <h3>{list[0]?.description}</h3>
                     </div>
-                }
-            </div>
-            <div>
-                {parks.map(park => (
-                    <div key={park.id}>
-                        <ParkCard park={park} />
-                        <button value={park.id} onClick={handleParkDelete}>Delete</button>
+                    <div className='list-detail-header-button'>
+                        <button className='mod-list-button' onClick={editAndDeleteClick}>Edit List</button>
+                        <button className='mod-list-button' onClick={handleListDelete}>Delete List</button>
                     </div>
-                ))}
+                </div>
+                <div className='edit-container'>
+                    {showForm &&
+                        <div className='edit-form-container'>
+                            <h3>Edit List</h3>
+                            <ul>
+                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                            <form className='edit-form'>
+                                <input
+                                    value={title}
+                                    onChange={e => setTitle(e.target.value)}
+                                    onBlur={titleValidation}
+                                />
+                                <input
+                                    type='text'
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                />
+                                <div>
+                                    <button className='edit-form-buttons' onClick={handleEditSubmit}>Submit</button>
+                                    <button className='edit-form-buttons' onClick={handleEditCancel}>Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                </div>
             </div>
-        </>
+            {parks.length ? parksMap : noParks}
+        </div>
     )
 };
 

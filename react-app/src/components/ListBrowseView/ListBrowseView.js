@@ -44,51 +44,78 @@ const ListBrowseView = () => {
         setTitle('');
         setDescription('');
         setShowForm(false);
-    }
+    };
+
+    const handleNewListClick = () => {
+        if (showForm === false) {
+            setShowForm(true);
+        } else if (showForm === true) {
+            setTitle('');
+            setDescription('');
+            setShowForm(false);
+        }
+    };
+
+    const titleValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['Title must not be empty']);
+        } else if (e.target.value.length > 40) {
+            setErrors(['Title must not be greater than 40 characters']);
+        } else {
+            setErrors([]);
+        }
+    };
 
     return (
         <div className='list-browse-page'>
             <div className='list-browse-header'>
-                <h1>List Browse View</h1>
+                <h1>My Lists</h1>
                 <button
                     className='new-list'
-                    onClick={e => setShowForm(true)}
+                    onClick={handleNewListClick}
                 >New List</button>
             </div>
-            {showForm &&
-                <div>
-                    <form onSubmit={handleSubmit}>
+            <div className='new-list-container'>
+                {showForm &&
+                    <div className='new-list-form-container'>
+                        <h3>New List</h3>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
-                        <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
-                        <input
-                            placeholder='title'
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                        />
-                        <input
-                            placeholder='description'
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
-                        />
-                        <button type='submit'>Create</button>
-                        <button onClick={handleCancel}>Cancel</button>
-                    </form>
-                </div>
-            }
+                        <form className='new-list-form' onSubmit={handleSubmit}>
+                            <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
+                            <input
+                                placeholder='title'
+                                value={title}
+                                required
+                                onChange={e => setTitle(e.target.value)}
+                                onBlur={titleValidation}
+                            />
+                            <input
+                                placeholder='description (optional)'
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                            />
+                            <div>
+                                <button className='new-list-form-buttons' type='submit'>Create</button>
+                                <button className='new-list-form-buttons' onClick={handleCancel}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
             <div className='list-card-container'>
                 {lists.map(list => (
                     <Link to={`/lists/${list.id}`} key={list.id}>
                         <div className='list-card'>
                             <div className='list-card-sparkle'>
-                                <h2>✨</h2>
+                                <h2 className='sparkle'>✨</h2>
                             </div>
                             <div className='list-card-info'>
                                 <h2>{list.title}</h2>
                                 <h3>{list.description}</h3>
                             </div>
-                            <div>
+                            <div className='list-card-arrow'>
                                 <img className='list-card-forward' src='https://res.cloudinary.com/jenn/image/upload/v1645474173/our-spot/icons8-forward-96_d4fpsu.png' alt='forward icon' />
                             </div>
                         </div>
