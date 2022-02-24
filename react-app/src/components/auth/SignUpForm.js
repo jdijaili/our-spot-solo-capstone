@@ -66,7 +66,7 @@ const SignUpForm = () => {
           </div>
           <div>
             <input
-              type='text'
+              type='email'
               name='email'
               placeholder='Email'
               onChange={updateEmail}
