@@ -59,7 +59,7 @@ const ListBrowseView = () => {
     return (
         <div className='list-browse-page'>
             <div className='list-browse-header'>
-                <h1>List Browse View</h1>
+                <h1>My Lists</h1>
                 <button
                     className='new-list'
                     onClick={handleNewListClick}
@@ -98,7 +98,7 @@ const ListBrowseView = () => {
                                 <h2>{list.title}</h2>
                                 <h3>{list.description}</h3>
                             </div>
-                            <div>
+                            <div className='list-card-arrow'>
                                 <img className='list-card-forward' src='https://res.cloudinary.com/jenn/image/upload/v1645474173/our-spot/icons8-forward-96_d4fpsu.png' alt='forward icon' />
                             </div>
                         </div>
