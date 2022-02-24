@@ -120,6 +120,16 @@ const ListDetailView = () => {
         </div>
     )
 
+    const titleValidation = (e) => {
+        if (e.target.value.length === 0) {
+            setErrors(['Title must not be empty']);
+        } else if (e.target.value.length > 40) {
+            setErrors(['Title must not be greater than 40 characters']);
+        } else {
+            setErrors([]);
+        }
+    };
+
     return (
         <div className='list-detail-page'>
             <div className='list-header'>
@@ -143,10 +153,8 @@ const ListDetailView = () => {
                         <form className='edit-form'>
                             <input
                                 value={title}
-                                onChange={e => {
-                                    setTitle(e.target.value)
-                                    console.log(title)
-                                }}
+                                onChange={e => setTitle(e.target.value)}
+                                onBlur={titleValidation}
                             />
                             <input
                                 type='text'

@@ -59,6 +59,8 @@ const ListBrowseView = () => {
     const titleValidation = (e) => {
         if (e.target.value.length === 0) {
             setErrors(['Title must not be empty']);
+        } else if (e.target.value.length > 40) {
+            setErrors(['Title must not be greater than 40 characters']);
         } else {
             setErrors([]);
         }
