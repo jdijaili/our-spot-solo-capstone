@@ -1,0 +1,63 @@
+.list-detail-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.list-header {
+    width: 91%;
+}
+
+.list-detail-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.list-detail-header-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.mod-list-button {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+.parks-browse-cards {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    width: 1400px;
+}
+
+.edit-form-container {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 25px;
+    width: 200px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.edit-form-buttons {
+    font-family: monospace;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 5px;
+}

@@ -46,6 +46,10 @@
     align-items: center;
 }
 
+.sparkle {
+    font-size: 30px;
+}
+
 .list-card-arrow {
     display: flex;
     justify-content: flex-end;

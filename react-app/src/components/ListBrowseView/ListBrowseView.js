@@ -92,7 +92,7 @@ const ListBrowseView = () => {
                     <Link to={`/lists/${list.id}`} key={list.id}>
                         <div className='list-card'>
                             <div className='list-card-sparkle'>
-                                <h2>✨</h2>
+                                <h2 className='sparkle'>✨</h2>
                             </div>
                             <div className='list-card-info'>
                                 <h2>{list.title}</h2>

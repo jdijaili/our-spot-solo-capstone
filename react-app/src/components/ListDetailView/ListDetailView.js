@@ -86,17 +86,34 @@ const ListDetailView = () => {
         }
     }
 
+    const editAndDeleteClick = () => {
+        if (showForm === false) {
+            setShowForm(true);
+        } else if (showForm === true) {
+            setTitle('');
+            setDescription('');
+            setShowForm(false);
+        }
+    }
+
     return (
-        <>
-            <div>
-                <h1>{list[0]?.title}</h1>
-                <h3>{list[0]?.description}</h3>
-                <button onClick={e => setShowForm(true)}>Edit List</button>
-                <button onClick={handleListDelete}>Delete</button>
+        <div className='list-detail-page'>
+            <div className='list-header'>
+                <div className='list-detail-header'>
+                    <div>
+                        <h1>{list[0]?.title}</h1>
+                        <h3>{list[0]?.description}</h3>
+                    </div>
+                    <div className='list-detail-header-button'>
+                        <button className='mod-list-button' onClick={editAndDeleteClick}>Edit List</button>
+                        <button className='mod-list-button' onClick={handleListDelete}>Delete List</button>
+                    </div>
+                </div>
 
                 {showForm &&
-                    <div>
-                        <form>
+                    <div className='edit-form-container'>
+                        <form className='edit-form'>
+                            <h3>Edit List</h3>
                             <input
                                 value={title}
                                 onChange={e => {
@@ -105,16 +122,19 @@ const ListDetailView = () => {
                                 }}
                             />
                             <input
+                                type='text'
                                 value={description}
                                 onChange={e => setDescription(e.target.value)}
                             />
-                            <button onClick={handleEditSubmit}>Submit</button>
-                            <button onClick={handleEditCancel}>Cancel</button>
+                            <div>
+                                <button className='edit-form-buttons' onClick={handleEditSubmit}>Submit</button>
+                                <button className='edit-form-buttons' onClick={handleEditCancel}>Cancel</button>
+                            </div>
                         </form>
                     </div>
                 }
             </div>
-            <div>
+            <div className='parks-browse-cards'>
                 {parks.map(park => (
                     <div key={park.id}>
                         <ParkCard park={park} />
@@ -122,7 +142,7 @@ const ListDetailView = () => {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 };
 
