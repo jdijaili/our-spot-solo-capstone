@@ -42,7 +42,7 @@ const ParkDetailView = () => {
             });
 
         if (addedPark) {
-            console.log('success')
+            alert('Park successfuly added!')
             // TODO: #32 add animation to display success
         }
     };
