@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getComments, postComment } from '../../store/comments';
@@ -67,6 +68,7 @@ const Comment = ({ parkId }) => {
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
+                    <input type="hidden" name="csrf_token" value={Cookies.get('XSRF-TOKEN')} />
                     <input
                         value={comment}
                         required
