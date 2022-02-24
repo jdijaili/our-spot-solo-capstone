@@ -90,10 +90,11 @@ const parksReducer = (state = {}, action) => {
             });
             return updatedState;
         case LOAD_PARKS_FOR_LIST:
+            let cleanState = {}
             action.parks.forEach(park => {
-                updatedState[park.id] = park;
+                cleanState[park.id] = park;
             });
-            return updatedState;
+            return cleanState;
         case TRASH_LIST_PARK_REF:
             delete updatedState[action.parkId];
             return updatedState;
