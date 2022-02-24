@@ -26,3 +26,16 @@
     border-radius: 50px;
     padding: 8px;
 }
+
+.demo-login-button {
+    font-family: monospace;
+    font-size: 16px;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+.demo-login-button:hover {
+    cursor: pointer;
+}

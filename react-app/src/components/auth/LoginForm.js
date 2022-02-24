@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import { demoLogin, login } from '../../store/session';
 import './LoginForm.css';
 
 const LoginForm = () => {
@@ -72,6 +72,7 @@ const LoginForm = () => {
             />
           </div>
           <button type='submit' className='login-button'>Login</button>
+          <button className='demo-login-button' onClick={e => dispatch(demoLogin())}>Demo</button>
         </form>
       </div>
       <div>
