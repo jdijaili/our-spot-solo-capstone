@@ -21,23 +21,36 @@ const CommentCard = ({ comment, parkId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const editedComment = {
-            id: comment.id,
-            parkId,
-            userId: userId,
-            reply,
-            comment: commentEdit
+        const commentErrors = [];
+        const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
+
+        if (commentEdit.length === 0) commentErrors.push('This field cannot be blank.');
+        if (!regExp.test(commentEdit)) commentErrors.push('This field must include valid content.');
+
+        if (commentErrors.length > 0) {
+            setErrors(commentErrors);
+        } else {
+            const editedComment = {
+                id: comment.id,
+                parkId,
+                userId: userId,
+                reply,
+                comment: commentEdit
+            }
+
+            const submittedComment = await dispatch(editComment(editedComment))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                });
+
+            if (submittedComment) {
+                setErrors([]);
+                setShowForm(false);
+            }
+
         }
 
-        const submittedComment = await dispatch(editComment(editedComment))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            });
-        console.log(submittedComment)
-        if (editedComment) {
-            setShowForm(false);
-        }
     };
 
     const handleDelete = async (e) => {
@@ -48,7 +61,13 @@ const CommentCard = ({ comment, parkId }) => {
         };
 
         await dispatch(deleteComment(deleteInfo));
-    }
+    };
+
+    const handleEditCancel = () => {
+        setCommentEdit(comment.commentText);
+        setErrors([]);
+        setShowForm(false);
+    };
 
     const userButtons = (
         <div className='comment-button-container'>
@@ -76,11 +95,11 @@ const CommentCard = ({ comment, parkId }) => {
                         <input
                             value={commentEdit}
                             onChange={e => setCommentEdit(e.target.value)}
-
+                            required
                         />
                         <div className='comment-button-container'>
                             <button className='comment-button' type='submit'>Submit</button>
-                            <button className='comment-button' onClick={e => setShowForm(false)}>Cancel</button>
+                            <button className='comment-button' onClick={handleEditCancel}>Cancel</button>
                         </div>
                     </form>
                 }

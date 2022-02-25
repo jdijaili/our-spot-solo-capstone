@@ -31,7 +31,7 @@ const Comment = ({ parkId }) => {
         const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
 
         if (comment.length === 0) commentErrors.push('This field cannot be blank.');
-        if (!regExp.test(comment)) commentErrors.push('This field must include valid content.')
+        if (!regExp.test(comment)) commentErrors.push('This field must include valid content.');
 
         if (commentErrors.length > 0) {
             setErrors(commentErrors);
