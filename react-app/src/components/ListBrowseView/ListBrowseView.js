@@ -29,8 +29,9 @@ const ListBrowseView = () => {
         if (title.length > 40) listErrors.push('Title cannot exceed 40 characters.');
         if (!regExp.test(title)) listErrors.push('Title must include valid content.');
 
-        if (description.length === 0) listErrors.push('Description cannot be blank.');
-        if (!regExp.test(description)) listErrors.push('Description must include valid content.');
+        if (description.length > 0) {
+            if (!regExp.test(description)) listErrors.push('Description must include valid content.');
+        }
 
         if (listErrors.length > 0) {
             setErrors(listErrors);
@@ -59,6 +60,7 @@ const ListBrowseView = () => {
     const handleCancel = () => {
         setTitle('');
         setDescription('');
+        setErrors([]);
         setShowForm(false);
     };
 
