@@ -14,13 +14,7 @@ const ListDetailView = () => {
     const userId = useSelector(state => state.session.user.id);
     const parks = Object.values(useSelector(state => state?.parks));
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
-    console.log(list)
     const id = list[0]?.id;
-    const stateTitle = list[0]?.title;
-    const stateDescription = list[0]?.description;
-    console.log(id)
-    console.log(stateTitle)
-    console.log(stateDescription)
 
     useEffect(() => {
         dispatch(getList(listId));
