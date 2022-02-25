@@ -1,13 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
 html {
+    position: relative;
     height: 100%;
 }
 
 body {
-    background: rgb(193, 198, 122);
-    background: linear-gradient(180deg, rgba(193, 198, 122, 1) 0%, rgba(147, 188, 143, 1) 52%);
+    position: relative;
+    /* background: rgb(193, 198, 122);
+    background: linear-gradient(180deg, rgba(193, 198, 122, 1) 0%, rgba(147, 188, 143, 1) 52%); */
     min-width: 1400px;
     margin: 0;
     height: 100%;
+}
+
+#root {
+    background: rgb(193, 198, 122);
+    background: linear-gradient(180deg, rgba(193, 198, 122, 1) 0%, rgba(147, 188, 143, 1) 52%);
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -23,4 +44,4 @@ input {
 
 input:focus {
     border: 2px solid rgb(212, 147, 61);
-  }
+}
