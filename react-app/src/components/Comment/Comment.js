@@ -26,22 +26,34 @@ const Comment = ({ parkId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newComment = {
-            parkId,
-            userId: user.id,
-            reply,
-            comment
+
+        const commentErrors = [];
+
+        if (comment.length === 0) commentErrors.push('This field cannot be blank.');
+        else if (!comment.split('').includes())
+
+        if (commentErrors.length > 0) {
+            setErrors(commentErrors);
+        } else {
+            const newComment = {
+                parkId,
+                userId: user.id,
+                reply,
+                comment
+            };
+
+            const submittedComment = await dispatch(postComment(newComment))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                });
+
+            if (submittedComment) {
+                setComment('');
+            }
+
         }
 
-        const submittedComment = await dispatch(postComment(newComment))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            });
-
-        if (submittedComment) {
-            setComment('');
-        }
     };
 
     const handleCancel = (e) => {
