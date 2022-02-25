@@ -50,6 +50,7 @@ const Comment = ({ parkId }) => {
                 });
 
             if (submittedComment) {
+                setErrors([]);
                 setComment('');
             }
 

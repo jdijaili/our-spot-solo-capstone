@@ -14,43 +14,64 @@ const ListDetailView = () => {
     const userId = useSelector(state => state.session.user.id);
     const parks = Object.values(useSelector(state => state?.parks));
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
+    console.log(list)
     const id = list[0]?.id;
+    const stateTitle = list[0]?.title;
+    const stateDescription = list[0]?.description;
+    console.log(id)
+    console.log(stateTitle)
+    console.log(stateDescription)
 
     useEffect(() => {
         dispatch(getList(listId));
         dispatch(getParksForList(listId));
     }, [dispatch, listId]);
 
-
     const [title, setTitle] = useState(list[0]?.title);
     const [description, setDescription] = useState(list[0]?.description);
     const [errors, setErrors] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
-
     const handleEditSubmit = async (e) => {
         e.preventDefault();
 
-        const editedList = {
-            id,
-            title,
-            description
-        };
+        const listErrors = [];
+        const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
 
-        const submittedEditedList = await dispatch(editList(editedList))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            });
+        if (title.length === 0) listErrors.push('Title cannot be blank.');
+        if (title.length > 40) listErrors.push('Title cannot exceed 40 characters.');
+        if (!regExp.test(title)) listErrors.push('Title must include valid content.');
 
-        if (submittedEditedList) {
-            setShowForm(false);
+        if (description.length > 0) {
+            if (!regExp.test(description)) listErrors.push('Description must include valid content.');
         }
+
+        if (listErrors.length > 0) {
+            setErrors(listErrors);
+        } else {
+            const editedList = {
+                id,
+                title,
+                description
+            };
+
+            const submittedEditedList = await dispatch(editList(editedList))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                });
+
+            if (submittedEditedList) {
+                setShowForm(false);
+            }
+        }
+
     };
 
     const handleEditCancel = () => {
-        setTitle(list.title);
-        setDescription(list.description);
+        setTitle(list[0]?.title);
+        setDescription(list[0]?.description);
+        setErrors([]);
         setShowForm(false);
     };
 
@@ -86,8 +107,10 @@ const ListDetailView = () => {
         }
     }
 
-    const editAndDeleteClick = () => {
+    const editOrCancelClick = () => {
         if (showForm === false) {
+            setTitle(list[0]?.title);
+            setDescription(list[0]?.description);
             setShowForm(true);
         } else if (showForm === true) {
             setTitle(list[0]?.title);
@@ -120,16 +143,6 @@ const ListDetailView = () => {
         </div>
     )
 
-    const titleValidation = (e) => {
-        if (e.target.value.length === 0) {
-            setErrors(['Title must not be empty']);
-        } else if (e.target.value.length > 40) {
-            setErrors(['Title must not be greater than 40 characters']);
-        } else {
-            setErrors([]);
-        }
-    };
-
     return (
         <div className='list-detail-page'>
             <div className='list-header'>
@@ -139,7 +152,7 @@ const ListDetailView = () => {
                         <h3>{list[0]?.description}</h3>
                     </div>
                     <div className='list-detail-header-button'>
-                        <button className='mod-list-button' onClick={editAndDeleteClick}>Edit List</button>
+                        <button className='mod-list-button' onClick={editOrCancelClick}>Edit List</button>
                         <button className='mod-list-button' onClick={handleListDelete}>Delete List</button>
                     </div>
                 </div>
@@ -154,7 +167,6 @@ const ListDetailView = () => {
                                 <input
                                     value={title}
                                     onChange={e => setTitle(e.target.value)}
-                                    onBlur={titleValidation}
                                 />
                                 <input
                                     type='text'

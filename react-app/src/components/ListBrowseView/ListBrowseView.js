@@ -74,16 +74,6 @@ const ListBrowseView = () => {
         }
     };
 
-    const titleValidation = (e) => {
-        if (e.target.value.length === 0) {
-            setErrors(['Title must not be empty']);
-        } else if (e.target.value.length > 40) {
-            setErrors(['Title must not be greater than 40 characters']);
-        } else {
-            setErrors([]);
-        }
-    };
-
     return (
         <div className='list-browse-page'>
             <div className='list-browse-header'>
@@ -107,7 +97,6 @@ const ListBrowseView = () => {
                                 value={title}
                                 required
                                 onChange={e => setTitle(e.target.value)}
-                                onBlur={titleValidation}
                             />
                             <input
                                 placeholder='description (optional)'
