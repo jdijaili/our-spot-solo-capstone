@@ -1,7 +1,7 @@
 # Our Spot App
 
 ## About
-Our Spot is a park finding app that is a loose interpretation of [AllTrails](https://www.alltrails.com/), where a user can discover and learn about local parks. This is the capstone project under App Academy's Full Stack Engineer program.
+Our Spot is a park finding app that is a loose interpretation of [AllTrails](https://www.alltrails.com/), where a user can discover and learn about local parks. This is the capstone project for App Academy's Full Stack Engineer program.
 
 
 ## Links
