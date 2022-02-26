@@ -110,14 +110,48 @@ def seed_parks():
         city='Foster City',
         state='California',
         description='Lakeside park featuring a boardwalk, boat launch & grassy areas, plus tennis & basketball courts.',
-        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645775812/our-spot/stand-between-and-singor_rf1gru.jpg'
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645895862/our-spot/5decd9fd9848839ba0373619fc5e7044_xgdhgs.jpg'
     )
 
-    # shoreline
-    # towata
-    # baylands
-    # briones
-    # byxbee
+    shoreline = Park(
+        name='Shoreline Park',
+        city='Alameda',
+        state='California',
+        description='This park provides a lovely view of the San Francisco skyline and features walking paths and picnic areas.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645900932/our-spot/F45C54A5-C69E-4BD9-B1F3-1C8BB36B25ED_s4cscr.jpg'
+    )
+
+    towata = Park(
+        name='Towata Park',
+        city='Alameda',
+        state='California',
+        description='A small park featuring a walking path around the bend of the alameda main island.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645901061/our-spot/99E0A8EB-B5FE-4B28-ADEC-F66D71482468_j6jlpg.jpg'
+    )
+
+    baylands = Park(
+        name='Baylands Park',
+        city='Sunnyvale',
+        state='California',
+        description='Developed park of 70+ acres on San Francisco Bay with playgrounds, trails & a wetlands preserve.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645901416/our-spot/baylands_mv1slh.jpg'
+    )
+
+    briones = Park(
+        name='Briones Park',
+        city='Palo Alto',
+        state='California',
+        description='Fanciful playground in a former apricot orchard with a field, basketball court and picnic tables.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645901550/our-spot/5779a28a0ec70fc2b2f6c3869ed83616_-united-states-california-santa-clara-county-palo-alto-green-acres-briones-park_b9e9v8.jpg'
+    )
+
+    byxbee = Park(
+        name='Byxbee Park',
+        city='Palo Alto',
+        state='California',
+        description='Birdwatching, cycling & walking are popular at this park with sculpted earth & conceptual art.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645901704/our-spot/Palo_Alto_Baylands_January_2013_002_muhdir.jpg'
+    )
 
     db.session.add(dolores)
     db.session.add(alta_plaza)
@@ -133,6 +167,11 @@ def seed_parks():
     db.session.add(stulsaft)
     db.session.add(seal_point)
     db.session.add(leo)
+    db.session.add(shoreline)
+    db.session.add(towata)
+    db.session.add(baylands)
+    db.session.add(briones)
+    db.session.add(byxbee)
 
     db.session.commit()
 
