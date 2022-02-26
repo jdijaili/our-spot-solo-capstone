@@ -32,9 +32,9 @@ const ListDetailView = () => {
         const listErrors = [];
         const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
 
-        if (title.length === 0) listErrors.push('Title cannot be blank.');
-        if (title.length > 40) listErrors.push('Title cannot exceed 40 characters.');
-        if (!regExp.test(title)) listErrors.push('Title must include valid content.');
+        if (title.length === 0) listErrors.push('Title must not be left blank');
+        if (title.length > 40) listErrors.push('Title cannot exceed 40 characters');
+        if (!regExp.test(title)) listErrors.push('Title must include valid content');
 
         if (description.length > 0) {
             if (!regExp.test(description)) listErrors.push('Description must include valid content.');
