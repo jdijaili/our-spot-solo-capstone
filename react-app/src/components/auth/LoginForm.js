@@ -19,7 +19,7 @@ const LoginForm = () => {
     const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
 
     if (email.length === 0) loginErrors.push('Email must not be left blank');
-    if (!email.includes('@') && !email.includes('.')) loginErrors.push('Valid email address required')
+    if (!email.includes('@') && !email.includes('.')) loginErrors.push('Valid email address format required')
     if (!regExp.test(email)) loginErrors.push('Email must include valid content');
 
     if (password.length === 0) loginErrors.push('Password must not be left blank');
