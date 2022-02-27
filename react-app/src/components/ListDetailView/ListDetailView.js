@@ -159,11 +159,14 @@ const ListDetailView = () => {
                             </ul>
                             <form className='edit-form'>
                                 <input
+                                    type='text'
+                                    placeholder='Title'
                                     value={title}
                                     onChange={e => setTitle(e.target.value)}
                                 />
                                 <input
                                     type='text'
+                                    placeholder='Description'
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}
                                 />
