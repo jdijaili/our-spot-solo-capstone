@@ -15,10 +15,24 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
 
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(['Credentials are incorrect. Please try again.']);
+    const loginErrors = [];
+    const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
+
+    if (email.length === 0) loginErrors.push('Email must not be left blank');
+    if (!email.includes('@') && !email.includes('.')) loginErrors.push('Valid email address format required')
+    if (!regExp.test(email)) loginErrors.push('Email must include valid content');
+
+    if (password.length === 0) loginErrors.push('Password must not be left blank');
+
+    if (loginErrors.length > 0) {
+      setErrors(loginErrors);
+    } else {
+      const data = await dispatch(login(email, password));
+      if (data) {
+        setErrors(['Credentials are incorrect. Please try again.']);
+      }
     }
+
   };
 
   const updateEmail = (e) => {
@@ -31,14 +45,6 @@ const LoginForm = () => {
 
   if (user) {
     return <Redirect to='/' />;
-  }
-
-  const loginValidation = () => {
-    if (email.includes(' ')) {
-      setErrors(['Spaces are not a valid character']);
-    } else {
-      setErrors([]);
-    }
   }
 
   return (
@@ -60,7 +66,6 @@ const LoginForm = () => {
               value={email}
               required
               onChange={updateEmail}
-              onBlur={loginValidation}
             />
           </div>
           <div>

@@ -16,13 +16,29 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+
+    const signupErrors = [];
+    const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
+
+    if (username.length === 0) signupErrors.push('Username must not be left blank');
+    if (username.length > 40) signupErrors.push('Username must not be greater than 40 characters');
+    if (!regExp.test(username)) signupErrors.push('Username must include valid content');
+
+    if (email.length === 0) signupErrors.push('Email must not be left blank');
+    if (!email.includes('@') && !email.includes('.')) signupErrors.push('Valid email address format required')
+    if (!regExp.test(email)) signupErrors.push('Email must include valid content');
+
+    if (password.length === 0) signupErrors.push('Password must not be left blank');
+    if (password !== repeatPassword) signupErrors.push('Passwords must match');
+
+    if (signupErrors.length > 0) {
+      setErrors(signupErrors);
+    } else {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
-    } else {
-      setErrors([...errors, 'Password: Passwords must match']);
+
     }
   };
 

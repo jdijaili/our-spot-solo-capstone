@@ -21,28 +21,46 @@ const ListBrowseView = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newList = {
-            userId,
-            title,
-            description
-        };
 
-        const submittedList = await dispatch(postList(newList))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            });
+        const listErrors = [];
+        const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
 
-        if (submittedList) {
-            setTitle('');
-            setDescription('');
-            setShowForm(false);
+        if (title.length === 0) listErrors.push('Title cannot be blank.');
+        if (title.length > 40) listErrors.push('Title cannot exceed 40 characters.');
+        if (!regExp.test(title)) listErrors.push('Title must include valid content.');
+
+        if (description.length > 0) {
+            if (!regExp.test(description)) listErrors.push('Description must include valid content.');
         }
+
+        if (listErrors.length > 0) {
+            setErrors(listErrors);
+        } else {
+            const newList = {
+                userId,
+                title,
+                description
+            };
+
+            const submittedList = await dispatch(postList(newList))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                });
+
+            if (submittedList) {
+                setTitle('');
+                setDescription('');
+                setShowForm(false);
+            }
+        }
+
     };
 
     const handleCancel = () => {
         setTitle('');
         setDescription('');
+        setErrors([]);
         setShowForm(false);
     };
 
@@ -53,16 +71,6 @@ const ListBrowseView = () => {
             setTitle('');
             setDescription('');
             setShowForm(false);
-        }
-    };
-
-    const titleValidation = (e) => {
-        if (e.target.value.length === 0) {
-            setErrors(['Title must not be empty']);
-        } else if (e.target.value.length > 40) {
-            setErrors(['Title must not be greater than 40 characters']);
-        } else {
-            setErrors([]);
         }
     };
 
@@ -89,7 +97,6 @@ const ListBrowseView = () => {
                                 value={title}
                                 required
                                 onChange={e => setTitle(e.target.value)}
-                                onBlur={titleValidation}
                             />
                             <input
                                 placeholder='description (optional)'

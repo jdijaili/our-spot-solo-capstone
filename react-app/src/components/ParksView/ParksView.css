@@ -7,8 +7,12 @@
 }
 
 .parks-browse-cards {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     gap: 100px;
-    width: 1400px;
+    width: 1400px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    row-gap: 28px;
 }

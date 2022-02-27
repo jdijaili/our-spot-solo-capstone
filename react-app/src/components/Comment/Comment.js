@@ -26,35 +26,41 @@ const Comment = ({ parkId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newComment = {
-            parkId,
-            userId: user.id,
-            reply,
-            comment
+
+        const commentErrors = [];
+        const regExp = /[a-zA-Z0-9!@#$%^&*()_+:?/,><\|]/g;
+
+        if (comment.length === 0) commentErrors.push('This field cannot be left blank.');
+        if (!regExp.test(comment)) commentErrors.push('This field must include valid content.');
+
+        if (commentErrors.length > 0) {
+            setErrors(commentErrors);
+        } else {
+            const newComment = {
+                parkId,
+                userId: user.id,
+                reply,
+                comment
+            };
+
+            const submittedComment = await dispatch(postComment(newComment))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                });
+
+            if (submittedComment) {
+                setErrors([]);
+                setComment('');
+            }
+
         }
 
-        const submittedComment = await dispatch(postComment(newComment))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            });
-
-        if (submittedComment) {
-            setComment('');
-        }
     };
 
     const handleCancel = (e) => {
         e.preventDefault();
         setComment('');
-    };
-
-    const commentValidation = (e) => {
-        if (e.target.value.length === 0) {
-            setErrors(['This field must not be empty']);
-        } else {
-            setErrors([]);
-        }
     };
 
     return (
@@ -73,7 +79,6 @@ const Comment = ({ parkId }) => {
                         value={comment}
                         required
                         onChange={e => setComment(e.target.value)}
-                        onBlur={commentValidation}
                         placeholder='Add a comment...'
                     />
                     <div className='new-comment-buttons'>
