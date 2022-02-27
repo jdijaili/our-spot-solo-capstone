@@ -7,7 +7,8 @@ import './ListBrowseView.css'
 
 const ListBrowseView = () => {
     const dispatch = useDispatch();
-    const { userId } = useParams();
+    // const { userId } = useParams();
+    const userId = useSelector(state => state.session.user.id)
     const lists = Object.values(useSelector(state => state.lists));
 
     const [title, setTitle] = useState('');
