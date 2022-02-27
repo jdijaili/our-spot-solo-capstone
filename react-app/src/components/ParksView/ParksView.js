@@ -18,7 +18,7 @@ const ParkView = () => {
             <div className='parks-browse-header'>
                 <h1>Explore your local parks</h1>
             </div>
-            <div className='parks-browse-cards'>
+            <div className='list-detail-park-cards'>
                 {parks.map(park => (
                     <div key={park.id}>
                         <ParkCard park={park} />
