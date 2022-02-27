@@ -11,10 +11,11 @@ const ListDetailView = () => {
     const history = useHistory();
     const { listId } = useParams();
 
-    const userId = useSelector(state => state.session.user.id);
+    const userId = useSelector(state => state.session?.user?.id);
     const parks = Object.values(useSelector(state => state?.parks));
     const list = Object.values(useSelector(state => state?.lists)).filter(list => list.id === parseInt(listId));
     const id = list[0]?.id;
+
 
     useEffect(() => {
         dispatch(getList(listId));
@@ -136,6 +137,10 @@ const ListDetailView = () => {
             </Link>
         </div>
     )
+
+    if (list[0]?.userId !== userId) {
+        history.push('/')
+    }
 
     return (
         <div className='list-detail-page'>

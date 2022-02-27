@@ -46,7 +46,7 @@ def seed_parks():
         city='Albany',
         state='California',
         description='Former landfill now a waterside park with graffiti art, a beach, hiking trails & skyline views.',
-        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645765928/our-spot/IMG_5362_mwwyoq.heic'
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645927845/our-spot/PXL_20210206_231833202_pnncyw.jpg'
     )
 
     cesar_chavez = Park(
@@ -153,6 +153,22 @@ def seed_parks():
         imageURL='https://res.cloudinary.com/jenn/image/upload/v1645901704/our-spot/Palo_Alto_Baylands_January_2013_002_muhdir.jpg'
     )
 
+    chabot = Park(
+        name='Chabot Park',
+        city='San Leandro',
+        state='California',
+        description='Leafy nature area with a big lake, hiking trails & a disc golf course, popular for fishing & biking.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645928468/our-spot/IMG_3706_lvw3iu.jpg'
+    )
+
+    levin = Park(
+        name='Ed R. Levin County Park',
+        city='Milpitas',
+        state='California',
+        description='Vast, natural retreat featuring 19 miles of trails, an off-leash dog park, a golf course & more.',
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645928808/our-spot/20220123_141252_zbrhae.jpg'
+    )
+
     db.session.add(dolores)
     db.session.add(alta_plaza)
     db.session.add(alamo_square)
@@ -172,6 +188,8 @@ def seed_parks():
     db.session.add(baylands)
     db.session.add(briones)
     db.session.add(byxbee)
+    db.session.add(chabot)
+    db.session.add(levin)
 
     db.session.commit()
 

@@ -22,7 +22,7 @@ const NavBar = () => {
         </li>
         {user ?
           <li>
-            <NavLink to={`/lists/user/${user.id}`}>
+            <NavLink to={`/lists`}>
               My Lists
             </NavLink>
           </li>

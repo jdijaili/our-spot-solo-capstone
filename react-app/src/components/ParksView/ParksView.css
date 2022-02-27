@@ -4,15 +4,12 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+    height: 100%;
 }
 
-.parks-browse-cards {
-    /* display: flex;
-    justify-content: center;
-    gap: 100px;
-    width: 1400px; */
+.list-detail-park-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: space-between;
-    row-gap: 28px;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
+    row-gap: 50px;
 }

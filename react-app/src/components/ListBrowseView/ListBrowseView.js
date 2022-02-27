@@ -1,13 +1,13 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllLists, postList } from '../../store/lists';
 import './ListBrowseView.css'
 
 const ListBrowseView = () => {
     const dispatch = useDispatch();
-    const { userId } = useParams();
+    const userId = useSelector(state => state.session.user.id)
     const lists = Object.values(useSelector(state => state.lists));
 
     const [title, setTitle] = useState('');
