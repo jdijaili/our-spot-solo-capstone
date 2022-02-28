@@ -32,12 +32,13 @@
     padding: 8px;
 }
 
-.parks-browse-cards {
-    display: flex;
-    justify-content: center;
-    gap: 100px;
-    width: 1400px;
+.list-detail-parks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
+    row-gap: 50px;
 }
+
 
 .edit-container {
     display: flex;

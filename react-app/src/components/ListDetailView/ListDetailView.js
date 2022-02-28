@@ -80,7 +80,7 @@ const ListDetailView = () => {
             });
 
         if (deletedList) {
-            history.push(`/lists/user/${userId}`);
+            history.push(`/lists`);
         }
     };
 
@@ -115,7 +115,7 @@ const ListDetailView = () => {
     }
 
     const parksMap = (
-        <div className='parks-browse-cards'>
+        <div className='list-detail-parks'>
             {parks.map(park => (
                 <div key={park.id} className='park-card-individual'>
                     <div className='park-delete-button-container'>
