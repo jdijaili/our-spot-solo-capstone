@@ -12,7 +12,7 @@ Our Spot is a park finding app that is a loose interpretation of [AllTrails](htt
 - [Wireframes](https://github.com/jdijaili/our-spot-solo-capstone/wiki/Wireframes)
 
 ## App Architecture
-Our Spot app is built with a Flask backend, PostgreSQL as the database, and with React/Redux for the frontend.
+Our Spot app is built with a Flask backend, PostgreSQL as the database, and with React/Redux on the frontend.
 
 ## Technologies Used
 - React <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/>
