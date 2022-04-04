@@ -14,7 +14,7 @@ def seed_parks():
         city='San Francisco',
         state='California',
         description='Alta Plaza is known for its panoramic view of the city. There\'s a playground, tennis court, and grand staircase that rises to a central plateau to admire the view from.',
-        imageURL='https://res.cloudinary.com/jenn/image/upload/v1645762315/our-spot/will-truettner--xpPBfInHP8-unsplash_1_vas2av.jpg'
+        imageURL='https://res.cloudinary.com/jenn/image/upload/v1649094389/our-spot/IMG_4025_w9sich.heic'
     )
 
     alamo_square = Park(
