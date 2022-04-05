@@ -6,8 +6,10 @@ class Park(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
+    address = db.Column(db.String(40), nullable=False)
     city = db.Column(db.String(40), nullable=False)
     state = db.Column(db.String(40), nullable=False)
+    zip_code = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     imageURL = db.Column(db.String, nullable=False)
 
@@ -20,8 +22,10 @@ class Park(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'address': self.address,
             'city': self.city,
             'state': self.state,
+            'zip_code': self.zip_code,
             'description': self.description,
             'imageURL': self.imageURL
         }
@@ -30,8 +34,10 @@ class Park(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'address': self.address,
             'city': self.city,
             'state': self.state,
+            'zipCode': self.zip_code,
             'description': self.description,
             'imageURL': self.imageURL
         }
